@@ -33,7 +33,7 @@
 
 ## Acknowledgements
 Thank you to kaggle.com for providing a majority of our data and making it simple to view and open in RStudio!<br>
-We would also like to thank Rona, for answering our questions during section, office hours, and Teams!
+We would also like to thank Rona, our TA, for answering our questions during section, office hours, and Teams!
 
 ## References
 
