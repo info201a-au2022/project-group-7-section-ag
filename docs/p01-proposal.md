@@ -11,7 +11,7 @@
 ## Keywords
 * Shaping the future
 * Space exploration
-* Stars and explanets
+* Stars and exoplanets
 
 ## Introduction
 &emsp;Mission: Planet is a project in which we look at star, explanet and Earth data to analyze how our species might survive beyond Earth's lifespan. On our website, we hope to have a filtering feature in which ussers can select certain features (e.g. temperature, distance, size) to compare exoplanets and stars with each other.<br>
@@ -36,6 +36,10 @@ Thank you to kaggle.com for providing a majority of our data and making it simpl
 We would also like to thank Rona, our TA, for answering our questions during section, office hours, and Teams!
 
 ## References
+### Datasets
+* [Earth temperature data](https://www.kaggle.com/datasets/sevgisarac/temperature-change?select=Environment_Temperature_change_E_All_Data_NOFLAG.csv)
+* [Exoplanet data](https://www.kaggle.com/datasets/sathyanarayanrao89/nasa-exoplanetary-system)
+* [US forest fire data](https://www.kaggle.com/datasets/chidmuthu/fires-clean)
 
 ## Appendix A: Questions
 * Is our topic a good topic?
