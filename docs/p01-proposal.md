@@ -23,7 +23,7 @@
 &emsp;Human values our topic touches on self-reliance, determination, and problem solving. Our issue we hope to help solve is one that concerns the future of the human race. The future is in our own hands and with these values in mind, we may be able to better prepare and anticipate issues for generations to come. <br>
 &emsp;Direct stakeholders for our website include astronomy enthusiasts who want to learn more about exoplanets and stars, policymakers supporting the increase in space exploration and investment, and aerospace engineers and researchers, who may use our data as a starting point in creating new technologies and designs that find exoplanets and study their habitability ([Burbach, 2019](https://www.sciencedirect.com/science/article/pii/S0265964617300693)). Indirect stakeholders include citizens who may be affected by decisions made by the gov’t and policymakers who use our website. <br>
 
-!["Space Funding Spending"](data/images/space_exploration_spending.jpg "hi")
+![Space Funding Spending](/data/images/space_exploration_spending.jpg)
 
 &emsp;Harms that may come from our project largely concern the ethics behind what we hope to achieve. Encouraging the search for other habitable planets may cause people to treat Earth as disposable. Colonizing other planets with the possibility of bringing bacteria, disease, and other harmful elements should be discussed ([Dirks, 2021](https://www.scientificamerican.com/article/the-ethics-of-sending-humans-to-mars/)). Benefits from our project could include the increased interest and investment in space exploration. Preparing early for the potential relocation of humans is another benefit, as our data could be implemented to discover new exoplanets and determine their living conditions. 
 
