@@ -6,7 +6,6 @@
 **Date**: Autumn 2022
 
 
-
 ## **Abstract**
 We are concerned with the ***future of our planet*** and how it can be influenced by ***space exploration***. Climate change has undoubtedly shaped the future of life on Earth and we believe with greater knowledge about stars and planets beyond our solar system, we will be able to ***prepare for life beyond Earth***. To address thiss concern, we plan to gather data about ***stars and exoplanets*** into a concise website that is able to filter specific information for users curious about space!
 
