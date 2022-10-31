@@ -13,7 +13,7 @@ We are concerned with the ***future of our planet*** and how it can be influence
 ## Keywords
 * Shaping the future
 * Space exploration
-* Stars and explanets
+* Stars and exoplanets
 
 ## Introduction
 ***Mission: Planet*** is a project in which we look at star, explanet and Earth data to analyze how our species might survive beyond Earth's lifespan. On our website, we hope to have a filtering feature in which ussers can select certain features (e.g. temperature, distance, size) to compare exoplanets and stars with each other.<br>
@@ -32,5 +32,7 @@ Harms that may come from our project largely concern the ethics behind what we h
 
 For what to do, see the [`../instructions/`](../instructions/) directory, specifically: 
 
-* [Design Brief](../instructions/project-design-brief.pdf)
-* [Project Proposal Requirements](../instructions/p01-proposal-requirements.md)
+## Appendix A: Questions
+* Is our topic a good topic?
+* Is it okay for the topic to be a bit more broad and have multiple topic goals?
+* Can we make slight alterations to our topic later if we discover we want to include something not mentioned here or get rid of something?
