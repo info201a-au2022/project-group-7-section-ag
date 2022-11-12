@@ -5,6 +5,17 @@ date: "11/12/2022"
 output: html_document
 ---
 
+# CHONK!
+```{r}
+# TO DO:
+# 1. create a new .R file that calculates 5 diff values (summary info)
+# 2. Write a dynamic paragraph abt summary info in index.Rmd
+# 3. Create table for summary info (?)
+# 4. Create chart/values for fires.csv
+# 5. Update project proposal (edit project goals)
+```
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```

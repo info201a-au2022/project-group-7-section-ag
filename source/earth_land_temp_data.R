@@ -54,9 +54,19 @@ monthly_avg_change <- temp_change_country %>%
   select(avg_change) %>% 
   summarise(avg_change_total = mean(avg_change))
 
-highest_month <- 
-  
-lowest_month <- 
+# month of the highest temp change
+highest_val <- max(monthly_avg_change$avg_change_total)
+
+highest_month <- monthly_avg_change %>% 
+  filter_all(any_vars(. %in% c(highest_val))) %>% 
+  pull(Months)
+
+# month of the lowest temp change
+lowest_val <- min(monthly_avg_change$avg_change_total)
+
+lowest_month <- monthly_avg_change %>% 
+  filter_all(any_vars(. %in% c(lowest_val))) %>% 
+  pull(Months)
 
 monthly_avg_plot <- plot(monthly_avg_change$avg_change_total)
 
