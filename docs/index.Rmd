@@ -1,7 +1,7 @@
 ---
-title: "Your Project Title"
-author: "project team members"
-date: "1/22/2022"
+title: "The STAR-ting Point for STAR and EXOPLANET Exploration!"
+author: "KelliAnn Ramirez, Salley Fang, Claire Zhang"
+date: "11/12/2022"
 output: html_document
 ---
 
