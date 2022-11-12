@@ -23,15 +23,19 @@ knitr::opts_chunk$set(echo = TRUE)
 # then "source" an R file (data_access.R)
 source("../source/Oceania_Temp_Change_Chart2.R")
 oceania_bar_graph
+oceania_avg_temp <- avg_oceania_temp_change
+
 ```
+
+Average temperature change in Oceania: `r oceania_avg_temp`
 
 ### Example 2: Initialize a variable and then use it
 ```{r}
 # Example 1: This function was "sourced" above
-msg <- data_access_test(" Morgan!")
+
 ```
 
-> `r msg` Hope you have a good day!! 
+#>r msg Hope you have a good day!! 
 
 ## ABOUT THIS FILE: 
 
