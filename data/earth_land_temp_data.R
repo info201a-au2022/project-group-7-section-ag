@@ -53,4 +53,19 @@ change_yearly_country <- temp_change_country %>%
   filter(Area == "Afghanistan", na.rm = TRUE) %>% 
   summarise(avg = mean(Y1961, na.rm = TRUE))
 
+# 8 - groups countries by continent and displays avg change per country for all months
+oceania_temp_change <- temp_change_country %>% 
+  group_by(Area) %>% 
+  select(avg_change) %>% 
+  summarise(avg_change = mean(avg_change, na.rm = TRUE)) %>% 
+  filter(Area %in% c("Australia", "Papua New Guinea", "New Zealand",
+                     "Fiji", "Solomon Islands", "Micronesia", "Vanuatu",
+                     "Samoa", "Kiribati", "Tonga", "Marshall Islands",
+                     "Palau", "Tuvalu", "Nauru"))
+
+# 9 - histogram of change_per_country 
+oceania_bar_graph <- ggplot(change_per_countries, aes(x=Area, y=avg_change)) +
+  geom_bar(stat="identity", color="black", fill="darkolivegreen4")
+oceania_bar_graph
+
   
