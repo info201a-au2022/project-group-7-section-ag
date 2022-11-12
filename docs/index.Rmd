@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ## What is this file for?
@@ -16,8 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 * Please see Canvas for more details.
 
 ## ACCESSING THE /source DIRECTORY
-### Example 1: Source some code and run a function
-```{r}
+### Sourcing Oceania Temperature Changes 
+```{r, echo = FALSE, out.width="150%"}
 # Example 1: Note relative path, which can be read: Up one
 # directory(..), down into source (/source), and 
 # then "source" an R file (data_access.R)
@@ -29,13 +29,15 @@ oceania_avg_temp <- avg_oceania_temp_change
 
 Average temperature change in Oceania: `r oceania_avg_temp`
 
-### Example 2: Initialize a variable and then use it
-```{r}
+### Sourcing Habitable Exoplanets 
+```{r, echo = FALSE}
 # Example 1: This function was "sourced" above
-
+source("../source/exoplanet-chart-code.R")
+habitable_exoplanets
 ```
 
-#>r msg Hope you have a good day!! 
+### Sourcing Fires by State Map
+
 
 ## ABOUT THIS FILE: 
 

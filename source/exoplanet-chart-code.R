@@ -1,5 +1,11 @@
+library(readr)
+
+file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"
+
+exoplanets <- read_csv(url(file))
+
 # INFO201 Project Source Code for exoplanets.csv
-exoplanets <- read_csv("exoplanets.csv")
+# exoplanets <- read_csv("exoplanets.csv")
 
 # select columns that we might care about
 exoplanets <- exoplanets %>% select(pl_name, hostname, sy_snum, sy_pnum, 
@@ -81,7 +87,7 @@ planet_summary %>%
   ggplot(aes(x=orbital_period_days, y=)) + geom_freqpoly(binwidth=1000)
 
 # 273K <= temp <= 300 K, habitable for humans
-temps %>%
+habitable_exoplanets <- temps %>%
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
   xlim(273, 300)
 

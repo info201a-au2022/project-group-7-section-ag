@@ -37,5 +37,6 @@ print(avg_oceania_temp_change)
 # 4 - histogram of change_per_country 
 oceania_bar_graph <- ggplot(oceania_temp_change, aes(x=Area, y=avg_change)) +
   geom_bar(stat="identity", color="black", fill="darkolivegreen4") +
-  ggtitle("Oceania Temperature Change")
+  ggtitle("Oceania Temperature Change") +
+  coord_flip()
 oceania_bar_graph

@@ -54,6 +54,10 @@ monthly_avg_change <- temp_change_country %>%
   select(avg_change) %>% 
   summarise(avg_change_total = mean(avg_change))
 
+highest_month <- 
+  
+lowest_month <- 
+
 monthly_avg_plot <- plot(monthly_avg_change$avg_change_total)
 
 # 4 - not working...try to find changes for each country selected
