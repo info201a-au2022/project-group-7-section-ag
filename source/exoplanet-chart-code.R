@@ -94,7 +94,7 @@ habitable <- planet_summary %>%
 # chart works
 # bar chart of habitable dataframe
 # 273K <= temp <= 300 K, habitable for humans
-habitable_exoplanets <- temps %>%
+habitable_exoplanets <- planet_temp_count %>%
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
   xlim(273, 300)
 

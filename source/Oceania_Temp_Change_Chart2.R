@@ -32,14 +32,12 @@ oceania_temp_change <- temp_change_country %>%
 avg_oceania_temp_change <- oceania_temp_change %>% 
   summarise(avg = mean(avg_change), na.rm = TRUE) %>% 
   pull(avg)
-print(avg_oceania_temp_change)
 
 # 4 - histogram of change_per_country 
 oceania_bar_graph <- ggplot(oceania_temp_change, aes(x=Area, y=avg_change)) +
   geom_bar(stat="identity", color="black", fill="darkolivegreen4") +
   ggtitle("Oceania Temperature Change") +
   coord_flip()
-oceania_bar_graph
 
 # 5 - average temperature change for each country for all months
 yearly_avg_change <- temp_change_country %>% 
