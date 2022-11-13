@@ -2,7 +2,8 @@ library(readr)
 
 file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"
 
-exoplanets <- read_csv(url(file))
+exoplanets <- read_csv('../data/exoplanets.csv')
+exoplanets <- read_csv(file)
 
 # INFO201 Project Source Code for exoplanets.csv
 # exoplanets <- read_csv("exoplanets.csv")
@@ -74,11 +75,11 @@ temps <- exoplanets %>% filter(!is.na(planet_equi_temp_k)) %>%
   summarize(count=n())
 
 # code for charts
-# chart works
+# chart don't works
 # bar chart of temps dataframe 
 # all planets, habitable or not
 temps %>% 
-  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") #+ geom_smooth(se=F)
+  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col() + xlim(240, 250)
 
 # line version graph above
 planet_summary %>% 
@@ -91,6 +92,7 @@ habitable_exoplanets <- temps %>%
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
   xlim(273, 300)
 
+temps %>% filter(planet_equi_temp_k >= 273 & planet_equi_temp_k <= 300) %>% nrow()
 # chart works
 # scatterplot of temps dataframe
 temps %>% 
