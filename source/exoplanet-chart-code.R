@@ -74,7 +74,8 @@ planet_temp_count <- exoplanets %>% filter(!is.na(planet_equi_temp_k)) %>%
 # bar chart of planet_temp_count dataframe 
 # all planets, habitable or not
 bar_planet_temp_count <- planet_temp_count %>% 
-  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col()
+  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col() +
+  labs(x="planet temperature")
 
 # chart works
 # line version graph above
@@ -96,7 +97,8 @@ habitable <- planet_summary %>%
 # 273K <= temp <= 300 K, habitable for humans
 habitable_exoplanets <- planet_temp_count %>%
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
-  xlim(273, 300)
+  xlim(273, 300) +
+  labs(x="planet temperature")
 
 # chart works
 # a chart where each dot represents a planets radius in Earth radii and mass in Earth masses.
