@@ -1,12 +1,7 @@
 library(readr)
 
-file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"
-
-exoplanets <- read_csv('../data/exoplanets.csv')
-exoplanets <- read_csv(file)
-
 # INFO201 Project Source Code for exoplanets.csv
-# exoplanets <- read_csv("exoplanets.csv")
+exoplanets <- read_csv('../data/exoplanets.csv')
 
 # select columns that we might care about
 exoplanets <- exoplanets %>% select(pl_name, hostname, sy_snum, sy_pnum, 
@@ -70,42 +65,43 @@ planet_summary$stellar_mass_sol[is.nan(planet_summary$stellar_mass_sol)] <- NA
 planet_summary$stellar_surf_grav[is.nan(planet_summary$stellar_surf_grav)] <- NA
 
 # number of planets with a certain temp
-temps <- exoplanets %>% filter(!is.na(planet_equi_temp_k)) %>% 
+planet_temp_count <- exoplanets %>% filter(!is.na(planet_equi_temp_k)) %>% 
   group_by(planet_equi_temp_k) %>% 
   summarize(count=n())
 
 # code for charts
-# chart don't works
-# bar chart of temps dataframe 
-# all planets, habitable or not
-temps %>% 
-  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col() + xlim(240, 250)
-
-# line version graph above
-planet_summary %>% 
-  select(planet_name, orbital_period_days) %>% 
-  filter(!is.na(orbital_period_days)) %>% 
-  ggplot(aes(x=orbital_period_days, y=)) + geom_freqpoly(binwidth=1000)
-
-# 273K <= temp <= 300 K, habitable for humans
-habitable_exoplanets <- temps %>%
-  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
-  xlim(273, 300)
-
-temps %>% filter(planet_equi_temp_k >= 273 & planet_equi_temp_k <= 300) %>% nrow()
 # chart works
-# scatterplot of temps dataframe
-temps %>% 
-  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_point() + geom_smooth()
+# bar chart of planet_temp_count dataframe 
+# all planets, habitable or not
+bar_planet_temp_count <- planet_temp_count %>% 
+  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col()
+
+# chart works
+# line version graph above
+line_planet_temp_count <- planet_temp_count %>% 
+  filter(!is.na(planet_equi_temp_k)) %>% 
+  ggplot(aes(x=planet_equi_temp_k, y=)) + geom_freqpoly(binwidth=50)
+
+# chart works
+# scatterplot of planet_temp_count dataframe
+scatter_planet_temp_count <- planet_temp_count %>% 
+  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_point() + geom_smooth(se=F)
   
 # dataframe with all habitable planets by temperature
 habitable <- planet_summary %>% 
   filter(planet_equi_temp_k >= 273 & planet_equi_temp_k <= 300)
 
 # chart works
+# bar chart of habitable dataframe
+# 273K <= temp <= 300 K, habitable for humans
+habitable_exoplanets <- temps %>%
+  ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
+  xlim(273, 300)
+
+# chart works
 # a chart where each dot represents a planets radius in Earth radii and mass in Earth masses.
 # a couple far out data points are omitted, remove xlim and ylim to see full thing
-planet_summary %>% 
+planet_rad_mass_e <- planet_summary %>% 
   select(planet_rad_e, planet_mass_e) %>% 
   filter(!is.na(planet_rad_e) & !is.na(planet_mass_e)) %>% 
   ggplot(aes(x=planet_mass_e, y=planet_rad_e)) + 
@@ -113,22 +109,25 @@ planet_summary %>%
   geom_point(aes(x=1, y=1), color="blue") + # Earth
   ylim(0, 50) +
   xlim(0, 10000)
-  
-
-table(planet_summary$planet_rad_e)
-colnames(exoplanets)
-length(unique(exoplanets$planet_name)) # 5044
-
-# -----
-planet_summary %>% 
-  select(planet_name, planet_equi_temp_k) %>% 
-  filter(!is.na(planet_equi_temp_k)) %>% 
-  ggplot(aes(x=planet_equi_temp_k, y=)) + geom_freqpoly(binwidth=50)
-
-planet_summary %>% 
-  #select(planet_name, planet_equi_temp_k) %>% 
-  filter(!is.na(planet_rad_e) && !is.na(planet_rad_j)) %>% 
-  ggplot(aes(x=planet_rad_j, y=planet_rad_e)) + geom_point()
 
 
+# planet volumes
+planet_volumes <- planet_summary %>% 
+  select(planet_name, planet_rad_e) %>% 
+  mutate(radius_mi = planet_rad_e * 3958.8) %>% 
+  summarize(planet_name, volume = ((4/3) * pi * (radius_mi) ^ 3))
 
+# unit = miles cubed
+planet_volumes <- drop_na(planet_volumes)
+
+planet_volumes <- planet_volumes %>% 
+  mutate(smaller_than_earth = volume < 2.6e11)
+
+num_planets_smaller_earth <- as.data.frame(table(planet_volumes$smaller_than_earth))
+colnames(num_planets_smaller_earth) = c("value", "count")
+
+percent_bigger <- (num_planets_smaller_earth[1, 2] / sum(num_planets_smaller_earth$count)) * 100
+percent_smaller <- (num_planets_smaller_earth[2, 2] / sum(num_planets_smaller_earth$count)) * 100
+
+#earth rad = 3958.8 mi
+# earth volume = 2.6e11 mi^3

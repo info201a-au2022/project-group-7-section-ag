@@ -54,11 +54,8 @@ avg_oceania_temp_change <- oceania_temp_change %>%
   pull(avg)
 
 
-
 # exoplanets.csv Summary Values
-file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"
-
-exoplanets <- read_csv(url(file))
+exoplanets <- read_csv('../data/exoplanets.csv')
 # 1 - 
 # make dataset smaller so that there is one row per planet, should have 5044 rows
 planet_summary <- exoplanets %>% 
@@ -111,10 +108,17 @@ num_planets_smaller_earth <- as.data.frame(table(planet_volumes$smaller_than_ear
 colnames(num_planets_smaller_earth) = c("value", "count")
 
 # VALUE #???: percent of planets bigger and smaller than Earth
+# percent_bigger, percent_smaller
 percent_bigger <- (num_planets_smaller_earth[1, 2] / sum(num_planets_smaller_earth$count)) * 100
 percent_smaller <- (num_planets_smaller_earth[2, 2] / sum(num_planets_smaller_earth$count)) * 100
 
-# Value #???: percent chance we'll arrive at a habitable exoplanet out of the 32552 in the dataset
+# Value #???: percent chance we'll arrive at a habitable exoplanet out of the 5044 in the dataset
+# percent_habitable
+num_habitable <- planet_summary %>% 
+  filter(planet_equi_temp_k >= 273 & planet_equi_temp_k <= 300) %>% 
+  nrow()
+
+percent_habitable <- (num_habitable / nrow(planet_summary)) * 100
 
 
 # fires.csv Summary Values
