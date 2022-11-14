@@ -141,98 +141,49 @@ percent_habitable <- round((num_habitable / nrow(planet_summary)) * 100, digits=
 # fires.csv Summary Values
 file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/fires.csv"
 
-# fires <- read_csv(url(file))
-# 
-# #1 Fires per year
-# year_df <- fires %>%
-#   group_by(year) %>%
-#   summarize(count = n())
-# 
-# #2 Fires in each state in 1992
-# state_1992_df <- fires %>%
-#   filter(year == "1992") %>%
-#   group_by(state) %>%
-#   summarize(count = n())
-# 
-# #3 Fires in each state in 1998
-# state_1998_df <- fires %>%
-#   filter(year == "1998") %>%
-#   group_by(state) %>%
-#   summarize(count = n())
-# 
-# #4 Fires in each state in 2015
-# state_2015_df <- fires %>%
-#   filter(year == "2015") %>%
-#   group_by(state) %>%
-#   summarize(count = n())
-# 
-# #5a Year with max fires
-# max_year <- year_df %>%
-#   filter(count == max(count)) %>%
-#   pull(year)
-# #2015
-# 
-# #5b Year with min fires
-# min_year <- year_df %>%
-#   filter(count == min(count)) %>%
-#   pull(year)
-# #1998
-# 
-# #6a Max fires in a year (2015)
-# count_max_year <- year_df %>%
-#   filter(count == max(count)) %>%
-#   pull(count)
-# # 46409
-# 
-# #6b Min fires in a year (1998)
-# count_min_year <- year_df %>%
-#   filter(count == min(count)) %>%
-#   pull(count)
-# # 9363
-# 
-# #7 Fires in each state
-# state_df <- fires %>%
-#   group_by(state) %>%
-#   summarize(count = n())
-# 
-# #8a State with max fires
-# max_state <- state_df %>%
-#   filter(count == max(count)) %>%
-#   pull(state)
-# # GA
-# 
-# #8b State with min fires
-# min_state <- state_df %>%
-#   filter(count == min(count)) %>%
-#   pull(state)
-# # DE HI
-# 
-# #9 Fires per month
-# month_df <- fires %>%
-#   group_by(month) %>%
-#   summarize(count = n())
-# 
-# #10a Month with max fires
-# max_month <- month_df %>%
-#   filter(count == max(count)) %>%
-#   pull(month)
-# # 07 July
-# 
-# #10b Month with min fires
-# min_month <- month_df %>%
-#   filter(count == min(count)) %>%
-#   pull(month)
-# # 12 December
-# 
-# #11 Fires in earliest year recorded (1992)
-# count_1992 <- year_df %>%
-#   filter(year == "1992") %>%
-#   pull(count)
-# # 15598
-# 
-# #12 Difference in fires from 1992 to 2015
-# fire_diff <- count_max_year - count_1992
-# # 30811
+fires <- read_csv(url(file))
+
+fires <- fires %>%
+  rename(year = FIRE_YEAR, date = DISCOVERY_DATE, state = STATE) %>%
+  mutate(month = format(as.Date(date, format = "%Y-%m-%d"),"%m")) %>%
+  mutate(state = tolower(state))
+
+# Fires by year dataframe
+year_df <- fires %>%
+  group_by(year) %>%
+  summarize(count = n())
+
+#1 Latest year recorded
+max_year <- year_df %>%
+   filter(year == max(year)) %>%
+   pull(year)
+# 2015
+
+#2 Earliest year recorded
+min_year <- year_df %>%
+   filter(year == min(year)) %>%
+   pull(year)
+# 1998
+
+#3 Number of fires in latest year
+count_max_year <- year_df %>%
+   filter(year == max_year) %>%
+   pull(count)
+# 46409
+
+#4 Number of fires in earliest year
+count_min_year <- year_df %>%
+   filter(year == min_year) %>%
+   pull(count)
+# 15598
+
+#5 Difference in number of fires from 1992 to 2015
+ fire_diff <- count_max_year - count_1992
+# 30811
+
+#6 Percent difference in fires from 1992 to 2015
+percent_diff <- 100*((count_max_year - count_1992)/((count_max_year + count_1992)/2))
+# 99.3791
 
 summary_values_df <- data.frame(highest_month_val,
                                 lowest_month_val,
