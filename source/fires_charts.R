@@ -30,7 +30,7 @@ state_df <- fires %>%
   group_by(state) %>%
   summarize(count = n())
 
-# Cloropleth map of total fires across US
+# Choropleth map of total fires across US
 state_shape <- map_data("state") %>%
   rename(state = region) %>%
   left_join(state_df, by = "state")
@@ -71,7 +71,7 @@ map_1998 <- ggplot(state_1998) +
   scale_fill_continuous(low = "#FFF4B0", high = "#CE0C00", limits = c(0, 6000)) +
   labs(fill = "# of Fires") +
   theme(legend.key.size = unit(0.4, 'cm')) +
-  labs(title = "US Fires in 1992") +
+  labs(title = "US Fires in 1998") +
   theme(plot.title = element_text(size = 12))
 
 

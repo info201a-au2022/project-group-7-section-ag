@@ -58,6 +58,7 @@ oceania_temp_change <- temp_change_country %>%
 avg_oceania_temp_change <- oceania_temp_change %>% 
   summarise(avg = mean(avg_change), na.rm = TRUE) %>% 
   pull(avg)
+avg_oceania_temp_change <- round(avg_oceania_temp_change, digits = 2)
 
 
 
