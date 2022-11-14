@@ -190,24 +190,7 @@ count_min_year <- year_df %>%
 
 #6 VALUE 7: Percent difference in fires from 1992 to 2015
 percent_diff <- 100*((count_max_year - count_min_year)/((count_max_year + count_min_year)/2))
-# 99.3791
-
-summary_values_df <- data.frame(highest_month_val,
-                                lowest_month_val,
-                                percent_bigger,
-                                percent_smaller,
-                                percent_habitable,
-                                fire_diff,
-                                percent_diff
-                                )
-
-# strings
-highest_month_val
-lowest_month_val
-
-# numerics
-percent_bigger
-percent_smaller
-percent_habitable
+percent_diff <- round(percent_diff, digits = 2)
+# 99.38
 
 
