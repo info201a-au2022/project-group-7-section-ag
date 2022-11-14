@@ -3,6 +3,12 @@ library(ggplot2)
 
 fires <- read.csv("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/fires.csv")
 
+# Mutating dataframe
+fires <- fires %>%
+  rename(year = FIRE_YEAR, date = DISCOVERY_DATE, state = STATE) %>%
+  mutate(month = format(as.Date(date, format = "%Y-%m-%d"),"%m")) %>%
+  mutate(state = tolower(state))
+
 # Fires by month dataframe
 month_df <- fires %>%
   group_by(month) %>%
