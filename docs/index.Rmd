@@ -56,7 +56,10 @@ It is important when looking for possible homes beyond Earth that we make sure w
 ```{r, echo=F}
 # fires.csv chart reference code here
 source("../source/fires_charts.R")
-total_fires_map
+year_plot
+map_1998
+map_2015
+
 ```
 
 Paragraph answering: Beneath each chart, you must include a brief paragraph, describing 
