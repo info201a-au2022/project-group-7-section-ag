@@ -41,7 +41,7 @@ habitable_exoplanets
 It is important when looking for possible homes beyond Earth that we make sure we can live on said planet. One of the most important things humans need is for the planet to have a comfortable climate. The chart above on the left reveals to us that most of the known exoplanets out there are roughly between 500 K and 750 K (~440 F - 890 F), which unfortunately means that most of the exoplanets out there are uninhabitable for humans. Humans are comfortable in temperatures from about 273 K to 300 K (~33 F - 80 F) and there are only roughly 41 possibly habitable exoplanets by temperature out of the 5044 known planets in this dataset. This is only a 0.81% chance that the exoplanet we arrive at is the right temperature. The chart above on the right shows planets at comfortable temperatures for humans. When compared to the left chart, this chart reveals to us how little habitable planets we know of in the context of all the exoplanets we’ve discovered and even the entire universe. This is important to include because we need to be aware that not every exoplanet out there can sustain human life. There are many factors that affect a planet that we may not know about until we get there such as we can’t land on the surface for some reason or the weather on the planet surface is so bad that it’s intolerable.
 
 ### Sourcing Fires by State Map
-```{r, echo=F}
+```{r, echo=F, out.width='50%'}
 # fires.csv chart reference code here
 source("../source/fires_charts.R")
 year_plot
