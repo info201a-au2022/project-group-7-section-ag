@@ -1,4 +1,4 @@
-source("summary_values.R")
+source("../source/summary_values.R")
 
 summary_values_df <- data.frame(highest_month_val,
                                 lowest_month_val,
