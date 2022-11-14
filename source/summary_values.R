@@ -20,21 +20,27 @@ monthly_avg_change <- temp_change_country %>%
   select(avg_change) %>% 
   summarise(avg_change_total = mean(avg_change))
 
-# 2b - month of the highest temp change (VALUE 1: highest_month_val)
+# 2b - month and value (rounded to two decimal points) of the highest temp change 
+# (VALUE 1: highest_month_val)
 highest_val <- max(monthly_avg_change$avg_change_total)
 
 highest_month <- monthly_avg_change %>% 
   filter_all(any_vars(. %in% c(highest_val))) %>% 
   pull(Months)
 
+highest_val <- round(highest_val, digits = 2)
+
 highest_month_val <- paste0(highest_month, ": ", highest_val)
 
-# 2c - month of the lowest temp change (VALUE 2: lowest_month_val)
+# 2c - month and value (rounded to two decimal points) of the lowest temp change 
+# (VALUE 2: lowest_month_val)
 lowest_val <- min(monthly_avg_change$avg_change_total)
 
 lowest_month <- monthly_avg_change %>% 
   filter_all(any_vars(. %in% c(lowest_val))) %>% 
   pull(Months)
+
+lowest_val <- round(lowest_val, digits = 2)
 
 lowest_month_val <- paste0(lowest_month, ": ", lowest_val)
 
@@ -52,6 +58,7 @@ oceania_temp_change <- temp_change_country %>%
 avg_oceania_temp_change <- oceania_temp_change %>% 
   summarise(avg = mean(avg_change), na.rm = TRUE) %>% 
   pull(avg)
+
 
 
 # exoplanets.csv Summary Values
@@ -73,8 +80,7 @@ colnames(exoplanets) <- c("planet_name", "host_name", "num_stars", "num_planets"
                           "spectral_type", "stellar_eff_temp_k", "stellar_rad_sol", "stellar_mass_sol",
                           "stellar_surf_grav"
 )
-# 1 - 
-# make dataset smaller so that there is one row per planet, should have 5044 rows
+# 1 - makes dataset smaller so that there is one row per planet, should have 5044 rows
 planet_summary <- exoplanets %>% 
   group_by(planet_name) %>% 
   summarize(num_stars = mean(num_stars, na.rm=T), 
@@ -124,7 +130,7 @@ planet_volumes <- planet_volumes %>%
 num_planets_smaller_earth <- as.data.frame(table(planet_volumes$smaller_than_earth))
 colnames(num_planets_smaller_earth) = c("value", "count")
 
-# VALUE 3, 4: percent of planets bigger and smaller than Earth
+# VALUE 3 & 4: percent of planets bigger and smaller than Earth
 # percent_bigger, percent_smaller
 percent_bigger <- round((num_planets_smaller_earth[1, 2] / sum(num_planets_smaller_earth$count)) * 100, digits=2)
 percent_smaller <- round((num_planets_smaller_earth[2, 2] / sum(num_planets_smaller_earth$count)) * 100, digits=2)
@@ -136,6 +142,7 @@ num_habitable <- planet_summary %>%
   nrow()
 
 percent_habitable <- round((num_habitable / nrow(planet_summary)) * 100, digits=2)
+
 
 
 # fires.csv Summary Values
