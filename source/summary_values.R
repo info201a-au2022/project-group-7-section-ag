@@ -124,12 +124,12 @@ planet_volumes <- planet_volumes %>%
 num_planets_smaller_earth <- as.data.frame(table(planet_volumes$smaller_than_earth))
 colnames(num_planets_smaller_earth) = c("value", "count")
 
-# VALUE #???: percent of planets bigger and smaller than Earth
+# VALUE 3, 4: percent of planets bigger and smaller than Earth
 # percent_bigger, percent_smaller
 percent_bigger <- round((num_planets_smaller_earth[1, 2] / sum(num_planets_smaller_earth$count)) * 100, digits=2)
 percent_smaller <- round((num_planets_smaller_earth[2, 2] / sum(num_planets_smaller_earth$count)) * 100, digits=2)
 
-# Value #???: percent chance we'll arrive at a habitable exoplanet out of the 5044 in the dataset
+# VALUE 5: percent chance we'll arrive at a habitable exoplanet out of the 5044 in the dataset
 # percent_habitable
 num_habitable <- planet_summary %>% 
   filter(planet_equi_temp_k >= 273 & planet_equi_temp_k <= 300) %>% 
@@ -177,11 +177,11 @@ count_min_year <- year_df %>%
    pull(count)
 # 15598
 
-#5 Difference in number of fires from 1992 to 2015
+#5 VALUE 6: Difference in number of fires from 1992 to 2015
  fire_diff <- count_max_year - count_min_year
 # 30811
 
-#6 Percent difference in fires from 1992 to 2015
+#6 VALUE 7: Percent difference in fires from 1992 to 2015
 percent_diff <- 100*((count_max_year - count_min_year)/((count_max_year + count_min_year)/2))
 # 99.3791
 
