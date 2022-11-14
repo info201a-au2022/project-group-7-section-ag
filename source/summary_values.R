@@ -21,7 +21,7 @@ monthly_avg_change <- temp_change_country %>%
   summarise(avg_change_total = mean(avg_change))
 
 # 2b - month of the highest temp change (VALUE 1: highest_month_val)
-highest_val <- round(max(monthly_avg_change$avg_change_total), digits=2)
+highest_val <- max(monthly_avg_change$avg_change_total)
 
 highest_month <- monthly_avg_change %>% 
   filter_all(any_vars(. %in% c(highest_val))) %>% 
@@ -30,7 +30,7 @@ highest_month <- monthly_avg_change %>%
 highest_month_val <- paste0(highest_month, ": ", highest_val)
 
 # 2c - month of the lowest temp change (VALUE 2: lowest_month_val)
-lowest_val <- round(min(monthly_avg_change$avg_change_total), digits=2)
+lowest_val <- min(monthly_avg_change$avg_change_total)
 
 lowest_month <- monthly_avg_change %>% 
   filter_all(any_vars(. %in% c(lowest_val))) %>% 
@@ -178,18 +178,20 @@ count_min_year <- year_df %>%
 # 15598
 
 #5 Difference in number of fires from 1992 to 2015
- fire_diff <- count_max_year - count_1992
+ fire_diff <- count_max_year - count_min_year
 # 30811
 
 #6 Percent difference in fires from 1992 to 2015
-percent_diff <- 100*((count_max_year - count_1992)/((count_max_year + count_1992)/2))
+percent_diff <- 100*((count_max_year - count_min_year)/((count_max_year + count_min_year)/2))
 # 99.3791
 
 summary_values_df <- data.frame(highest_month_val,
                                 lowest_month_val,
                                 percent_bigger,
                                 percent_smaller,
-                                percent_habitable
+                                percent_habitable,
+                                fire_diff,
+                                percent_diff
                                 )
 
 # strings
