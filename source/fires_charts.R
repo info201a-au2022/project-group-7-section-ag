@@ -1,5 +1,7 @@
 library(dplyr)
 library(ggplot2)
+library(maps)
+library(mapproj)
 
 fires <- read.csv("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/fires.csv")
 
@@ -33,7 +35,7 @@ state_df <- fires %>%
   group_by(state) %>%
   summarize(count = n())
 
-# CLoropleth map of total fires across US
+# Cloropleth map of total fires across US
 state_shape <- map_data("state")
 
 ggplot(state_shape) +
@@ -48,7 +50,7 @@ state_shape <- map_data("state") %>%
   rename(state = region) %>%
   left_join(state_df, by = "state")
 
-ggplot(state_shape) +
+total_fires_map <- ggplot(state_shape) +
   geom_polygon(
     mapping = aes(x = long, y = lat, group = group, fill = count),
     color = "black",

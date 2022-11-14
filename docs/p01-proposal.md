@@ -20,7 +20,6 @@
 ## **Problem Domain**
 &emsp;Our topic is about outer space, specifically how we can discover and study exoplanets and their surroundings to determine if they are habitable. Our topic concerns human well-being, as the state of Earth may affect the ability for humans to inhabit it in the future ([Vince, 2022](https://time.com/6209432/climate-change-where-we-will-live/)). <br>
 &emsp;We hope to frame our project around data goals. We want to use data gathered about exoplanets and the stars they are near to find patterns in how features in one may reflect features of the other (e.g., the size of a star corresponding to a certain mass of an exoplanet nearby). We also want to include data about Earth to give users of the website an idea as to what features an exoplanet needs in order to sustain human life in the future. Lastly, we hope to touch on the ethics behind our project. There are concerns with how the search for a new planet could lead to changes in how we treat Earth and with what we should do if we encounter extraterrestrial life ([Munro, 2022](https://www.cigionline.org/articles/if-humanity-is-to-succeed-in-space-our-ethics-must-evolve/)). <br>
-
 &emsp;Human values our topic touches on self-reliance, determination, and problem solving. Our issue we hope to help solve is one that concerns the future of the human race. The future is in our own hands and with these values in mind, we may be able to better prepare and anticipate issues for generations to come. <br>
 &emsp;Direct stakeholders for our website include astronomy enthusiasts who want to learn more about exoplanets and stars, policymakers supporting the increase in space exploration and investment, and aerospace engineers and researchers, who may use our data as a starting point in creating new technologies and designs that find exoplanets and study their habitability ([Burbach, 2019](https://www.sciencedirect.com/science/article/pii/S0265964617300693)). Indirect stakeholders include citizens who may be affected by decisions made by the gov’t and policymakers who use our website. <br>
 
@@ -29,17 +28,13 @@
 &emsp;Harms that may come from our project largely concern the ethics behind what we hope to achieve. Encouraging the search for other habitable planets may cause people to treat Earth as disposable. Colonizing other planets with the possibility of bringing bacteria, disease, and other harmful elements should be discussed ([Dirks, 2021](https://www.scientificamerican.com/article/the-ethics-of-sending-humans-to-mars/)). Benefits from our project could include the increased interest and investment in space exploration. Preparing early for the potential relocation of humans is another benefit, as our data could be implemented to discover new exoplanets and determine their living conditions. 
 
 ## **Research Questions**
-1. **Which exoplanet conditions make it habitable for humans in the future?**
+1. **Of the exoplanets we know of, what is the proportion of those exoplanets being habitable? What are some commonalities between the habitable exoplanets?**
     * Because of the strong likelihood of Earth becoming uninhabitable in the future, we need to find patterns in exoplanets that could make it liveable for humans. It is important to start this exploration process early due to the sheer number of exoplanets that have already been discovered and have yet to be discovered.
 2. **How has climate change affected Earth over time (e.g., temperature, natural disasters, air quality)?**
     * This is important because climate change will eventually make Earth uninhabitable. Where will we live when that happens? Learning about outside planetary systems helps us prepare for that inevitable future.
-3. **Can stars guide us to find new exoplanets and galaxies that could eventually be colonized by humans?**
-    * Many people’s interest in astronomy and space exploration have begun through stargazing. Throughout history, explorers have used the stars to guide them across Earth. Can we use this interest and our history with stars as navigation to further space exploration?
-4. **What features of stars typically have livable exoplanets?**
-    * This is important because if we can identify patterns and commonalities between such stars, then it would be so much easier to identify possible liveable planets if one doesn’t turn out so.
-5. **What are the ethical concerns behind space exploration?**
+3. **What are the ethical concerns behind space exploration?**
     * One potentially harmful mindset behind the desire for space exploration is seeing the Earth as disposable and impermanent. Will this view lead to even worse mistreatment of the Earth as people begin to see it as a temporary place to live?
-6. **What happens if we encounter/discover life beyond Earth?**
+4. **What happens if we encounter/discover life beyond Earth?**
     * This is important because we have to consider that we would be bringing Earth bacteria and organisms to the other planet and potentially harming the life already there. We also have to consider what to do if we find a habitable planet but another species has colonized it. Do we try to mesh ourselves into the existing society or do we wipe it out to create our own?
 
 
