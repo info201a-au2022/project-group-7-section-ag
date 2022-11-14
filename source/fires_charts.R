@@ -92,7 +92,7 @@ ggplot(state_1998) +
   labs(fill = "Fire Count")
 
 
-# Fires by state in 1998 dataframe
+# Fires by state in 2015 dataframe
 state_2015_df <- fires %>%
   filter(year == "2015") %>%
   group_by(state) %>%
