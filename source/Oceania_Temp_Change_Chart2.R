@@ -38,6 +38,7 @@ oceania_bar_graph <- ggplot(oceania_temp_change, aes(x=Area, y=avg_change)) +
   geom_bar(stat="identity", color="black", fill="darkolivegreen4") +
   ggtitle("Oceania Temperature Change") +
   coord_flip()
+oceania_bar_graph
 
 # 5 - average temperature change for each country for all months
 yearly_avg_change <- temp_change_country %>% 
@@ -60,9 +61,18 @@ highest_month <- monthly_avg_change %>%
   filter_all(any_vars(. %in% c(highest_val))) %>% 
   pull(Months)
 
+highest_val <- round(highest_val, digits = 2)
+
+highest_month_val <- paste0(highest_month, ": ", highest_val)
+
 # 8 - month of the lowest temperature change
 lowest_val <- min(monthly_avg_change$avg_change_total)
 
 lowest_month <- monthly_avg_change %>% 
   filter_all(any_vars(. %in% c(lowest_val))) %>% 
   pull(Months)
+
+lowest_val <- round(lowest_val, digits = 2)
+
+lowest_month_val <- paste0(lowest_month, ": ", lowest_val)
+
