@@ -15,14 +15,16 @@ The values we chose display crucial information to help answer our research ques
 
 ## Summary Information Tables
 ### `earth_temp_summary_table`
-```{r, warning=F, echo=F}
+```{r, echo=F}
 source("../source/summary_values_table.R")
 earth_temp_summary_table
+exoplanets_summary_table
+fires_summary_table
 ```
 This table displays the ***average change in temperature*** of _all countries in the dataframe across all years and months_ that were counted. We wanted to include this table because it shows how every country (besides _Nauru_ and _Pitcairn Islands_) showed increases in temperature. It tells us how temperature increases are not a trivial or randomly occurring change but a worldwide one that should be taken seriously.
 
 ### `exoplanets_summary_table`
-```{r, warning=F, echo=F}
+```{r, echo=F}
 source("../source/summary_values_table.R")
 exoplanets_summary_table
 ```
