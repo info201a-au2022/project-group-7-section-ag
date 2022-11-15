@@ -194,4 +194,14 @@ percent_diff <- 100*((count_max_year - count_min_year)/((count_max_year + count_
 percent_diff <- round(percent_diff, digits = 2)
 # 99.38
 
+# Table containing all 7 summary info values
+summary_info_table <- data.frame(
+  highest_month_val,
+  lowest_month_val,
+  percent_bigger,
+  percent_smaller,
+  percent_habitable,
+  fire_diff,
+  percent_diff
+)
 
