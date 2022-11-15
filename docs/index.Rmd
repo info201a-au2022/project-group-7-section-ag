@@ -42,7 +42,6 @@ This table displays the ***average fire size*** (in acres) for _all years_ inclu
 ### Sourcing Oceania Temperature Changes 
 ```{r, echo = FALSE, out.width='50%'}
 source("../source/Oceania_Temp_Change_Chart2.R")
-#plot(temp_change_country$avg_change, main = "hello", xlab = "", ylab = "")
 plot(yearly_avg_change$avg_change_total, 
      main = "Average Temperature Change By Country ", 
      xlab = "country index number", 
@@ -51,7 +50,9 @@ plot(yearly_avg_change$avg_change_total,
 oceania_bar_graph
 ```
   
-This bar graph is an example of the types of data visualizations we will include on our final website. It displays the _average temperature change_ across all months and years included in the dataframe (Jan-Dec, 1961-2019) for each _country_ in the selected continent. This average change is displayed in a bar graph where the ***x-axis*** is the _country’s name_ (`Area`) and the ***y-axis*** shows the _average change in temperature_ (`avg_change`). As seen in _Oceania Temperature Change_, all countries (besides Nauru) showed increases in temperature that averaged `0.33` degrees. 
+The plot (**Average Temperature Change By Country**) reflects the average change in temperature (in Celsius) for each country (represented by an index). There are a total of 284 countries in the dataset. This scatterplot reflects the distribution of temperature changes and shows the change is concentrated around 0.3 degrees. It also shows how nearly every country increased in temperature, with some reaching ~1.5 degree increase. We included this plot because it could be used to visualize trends in temperature changes.
+
+This bar graph (**Oceania Temperature Change**) is an example of the types of data visualizations we will include on our final website. It displays the _average temperature change_ across all months and years included in the dataframe (Jan-Dec, 1961-2019) for each _country_ in the selected continent. This average change is displayed in a bar graph where the ***x-axis*** is the _country’s name_ (`Area`) and the ***y-axis*** shows the _average change in temperature_ (`avg_change`). As seen in _Oceania Temperature Change_, all countries (besides Nauru) showed increases in temperature that averaged `0.33` degrees. 
 
 We want our final website to allow users to filter data by continents so it displays each country in that continent’s average temperature change. This can reveal how the changes in temperature differ by region, as different continents likely have differing patterns in temperature increase. We decided to include this feature because we wanted users to see a more ‘zoomed in’ view of temperature. Rather than seeing data on a large scale, we wanted to display it by continents so viewers can easily spot patterns and see temperature changes under different parts of the world. Since different climates likely correspond to differing changes in temperature, our visualization can display unique changes by area clearer.
 
@@ -62,7 +63,7 @@ bar_planet_temp_count
 habitable_exoplanets
 ```
 
-It is important when looking for possible homes beyond Earth that we make sure we can live on said planet. One of the most important things humans need is for the planet to have a comfortable climate. The chart above on the left reveals to us that most of the known exoplanets out there are roughly between _500 K and 750 K_ (~440 F - 890 F), which unfortunately means that most of the exoplanets out there are uninhabitable for humans. Humans are comfortable in temperatures from about _273 K to 300 K_ (~33 F - 80 F) and there are only roughly _41 possibly habitable exoplanets_ by temperature out of the 5044 known planets in this dataset. This is only a **0.81%** chance that the exoplanet we arrive at is the right temperature. The chart above on the right shows planets at comfortable temperatures for humans. When compared to the left chart, this chart reveals to us how little habitable planets we know of in the context of all the exoplanets we’ve discovered and even the entire universe. This is important to include because we need to be aware that not every exoplanet out there can sustain human life. There are many factors that affect a planet that we may not know about until we get there such as we can’t land on the surface for some reason or the weather on the planet surface is so bad that it’s intolerable.
+It is important when looking for possible homes beyond Earth that we make sure we can live on said planet. One of the most important things humans need is for the planet to have a comfortable climate. The left bar graph (**All Exoplanet Temperatures**) reveals to us that most of the known exoplanets out there are roughly between _500 K and 750 K_ (~440 F - 890 F), which unfortunately means that most of the exoplanets out there are uninhabitable for humans. Humans are comfortable in temperatures from about _273 K to 300 K_ (~33 F - 80 F) and there are only roughly _41 possibly habitable exoplanets_ by temperature out of the 5044 known planets in this dataset. This is only a **0.81%** chance that the exoplanet we arrive at is the right temperature. The right bar graph (**Possible Habitable Exoplanet Temperatures**) shows planets at comfortable temperatures for humans. When compared to the left chart, this chart reveals to us how little habitable planets we know of in the context of all the exoplanets we’ve discovered and even the entire universe. This is important to include because we need to be aware that not every exoplanet out there can sustain human life. There are many factors that affect a planet that we may not know about until we arrive there (e.g., we can’t land on the surface, the weather on the planet surface is too high).
 
 ### Sourcing Fires by State Map
 ```{r, echo=F, out.width='50%'}
@@ -74,21 +75,7 @@ map_2015
 
 ```
 
-The `year_plot` bar graph is important in seeing the gradual increase in fires over the course of
-23 years (1992-2015). It shows how dramatic the number of fires has jumped in just the previous five
-years from 2010 to 2015. The increase in fires from 1992 to 2010 revealed a more gradual increase,
-reflected in the shift from lighter oranges to darker yellows to darker oranges. But after 2010,
-that color shifted suddenly to a deep red.
-
-The `map_1998` choropleth map was included to give viewers a map to compare the more recent fires map
-(`map_2015`) to. The parts of the map shaded in gray represent states in which fire counts were not
-given. The map reveals the distribution of fires throughout the country. The distribution of fires
-was pretty uniform, besides in Mississippi. 
-
-The `map_2015` map was included to show how dramatic the increase in fires has been. Compared to the
-`map_1998` fire distribution, this map shows dramatic changes in certain states, especially ***California,
-Kansas, and New York***. In the 1998 map, these states either had an unreported number of fires (_Kansas_, 
-_New York_) or far fewer than in 2015 (_California_). This jump was not over the course of centuries or
-multiple decades, but over the course of just over 20 years. This can reveal how urgent of an issue fires
-has become in recent years and the importance of dealing with climate change.
+The bar graph (**US Fires 1992-2015**) is important in seeing the gradual increase in fires over the course of 23 years (1992-2015). It shows how dramatic the number of fires has jumped in just the previous five years from 2010 to 2015. The increase in fires from 1992 to 2010 revealed a more gradual increase, reflected in the shift from lighter oranges to darker yellows to darker oranges. But after 2010, that color shifted suddenly to a deep red.
+The choropleth map (**US Fires in 1998**) was included to give viewers a map to compare the more recent fires map (**US Fires in 2015**) to. The parts of the map shaded in gray represent states in which fire counts were not given. The map reveals the distribution of fires throughout the country. The distribution of fires was pretty uniform, besides in Mississippi. 
+The second choropleth map (**US Fires in 2015**) was included to show how dramatic the increase in fires has been. Compared to the 1998 fire distribution map (**US Fires in 1998**), this map shows dramatic changes in certain states, especially ***California, Kansas, and New York***. In the 1998 map, these states either had an unreported number of fires (_Kansas, New York_) or far fewer than in 2015 (_California_). This jump was not over the course of centuries or multiple decades, but over the course of just over 20 years. This can reveal how urgent of an issue fires has become in recent years and the importance of dealing with climate change.
 
