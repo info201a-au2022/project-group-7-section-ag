@@ -6,25 +6,41 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ## Dynamic Paragraph
 The values we chose display crucial information to help answer our research questions. The ***first two values*** were taken from `earth-land-temps.csv`. **Value 1** (`highest_month_value`) includes the month and value of the highest temperature change across all years and countries recorded: `March: 0.6`. **Value 2** (`lowest_month_val`) includes the month and value of the lowest temperature change across all years and countries recorded: `December: 0.43`. These values show the narrow range of temperature increases throughout the year and when higher temperature increases occurred to find connections between temperature increase and time of year. The ***next three values*** were taken from `exoplanets.csv`. **Value 3** (`percent_bigger`) is the percent of exoplanets bigger than the Earth (95.39%) and **Value 4** (`percent_smaller`) is the percent smaller than Earth (4.61%). These percentages are important in learning about the features that can make exoplanets habitable and giving an idea of the likelihood of finding them. **Value 5** (`percent_habitable`) is the chance we will find a habitable exoplanet given the ones in the dataset: 0.81%. This gives viewers a better understanding of the difficulty in finding other habitable planets. The ***last two values*** were taken from `fires.csv`. **Value 6** (`fire_diff`) is the difference between the number of fires in the earliest recorded year (1992) and latest (2015): 30,811. **Value 7** (`percent_diff`) is the percent difference between fires from the earliest and latest years (1992-2015): 99.38%. These values are important as they clearly reflect the dramatic increase in fires in just over thirty years. The numerical increase and percentages both reflect how dramatic the change is in different ways.
 
-## Summary Information Table
+## Summary Information Tables
+### `earth_temp_summary_table`
 ```{r, warning=F, echo=F}
-library(knitr)
 source("../source/summary_values_table.R")
-kable(summary_values_df)
+earth_temp_summary_table
 ```
+This table displays the ***average change in temperature*** of _all countries in the dataframe across all years and months_ that were counted. We wanted to include this table because it shows how every country (besides _Nauru_ and _Pitcairn Islands_) showed increases in temperature. It tells us how temperature increases are not a trivial or randomly occurring change but a worldwide one that should be taken seriously.
 
+### `exoplanets_summary_table`
+```{r, warning=F, echo=F}
+source("../source/summary_values_table.R")
+exoplanets_summary_table
+```
+This table displays the ***average orbital day*** for exoplanets with an _orbital period between 200 to 700 days_ for each applicable ***discovery method***, not including ones that were used to discover exoplanets with orbital periods not in the range (200-700). We wanted to include this table to give a better idea as to the discovery methods that can most accurately find the exoplanets with orbital periods similar to Earth's. This tells us that ***Eclipse Timing Variations*** has found exoplanets with an average orbital period most similar to Earth. Astronomers may want to utilize this method over others in discovering more exoplanets.
+
+### `fires_summary_table`
+```{r, warning=F, echo=F}
+source("../source/summary_values_table.R")
+fires_summary_table
+```
+This table displays the ***average fire size*** (in acres) for _all years_ included in the dataframe. We wanted to include this table to show how much the size of fires has increased in just 23 years. In **1992**, the average fire size was ***12.01 acres***. By 2015, the average fire size had increased to ***110.31 acres***. This dramatic increase reflects how much of a fast growing issue forest fires are becoming in recent years.
+
+## Summary Charts
 ### Sourcing Oceania Temperature Changes 
 ```{r, echo = FALSE, out.width='50%'}
 source("../source/Oceania_Temp_Change_Chart2.R")
 oceania_bar_graph
 oceania_avg_temp <- avg_oceania_temp_change
-
 ```
   
 This bar graph is an example of the types of data visualizations we will include on our final website. It displays the _average temperature change_ across all months and years included in the dataframe (Jan-Dec, 1961-2019) for each _country_ in the selected continent. This average change is displayed in a bar graph where the ***x-axis*** is the _country’s name_ (`Area`) and the ***y-axis*** shows the _average change in temperature_ (`avg_change`). As seen in _Oceania Temperature Change_, all countries (besides Nauru) showed increases in temperature that averaged `0.33` degrees. 
