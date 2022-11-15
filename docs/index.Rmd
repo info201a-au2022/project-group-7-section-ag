@@ -42,8 +42,12 @@ This table displays the ***average fire size*** (in acres) for _all years_ inclu
 ### Sourcing Oceania Temperature Changes 
 ```{r, echo = FALSE, out.width='50%'}
 source("../source/Oceania_Temp_Change_Chart2.R")
-plot(temp_change_country$avg_change)
-plot(yearly_avg_change$avg_change_total)
+#plot(temp_change_country$avg_change, main = "hello", xlab = "", ylab = "")
+plot(yearly_avg_change$avg_change_total, 
+     main = "Average Temperature Change By Country ", 
+     xlab = "country index number", 
+     ylab = "average temperature change in C (total)"
+     )
 oceania_bar_graph
 ```
   
