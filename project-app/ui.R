@@ -29,14 +29,14 @@ temp_inputs <- sidebarPanel(
   selectInput(
     "temp_x_input",
     "Select an x variable:",
-    choices = colnames(earth_land_temp_df)[c(-5,-6,-7)],
-    selected = "Area"
+    choices = colnames(earth_temp_simplifed),
+    selected = "Country"
   ),
   selectInput(
     "temp_y_input",
     "Select a y variable:",
-    choices = colnames(earth_land_temp_df)[c(-5,-6,-7)],
-    selected = "Y1961"
+    choices = colnames(earth_temp_simplifed),
+    selected = "1961"
   )
 )
 

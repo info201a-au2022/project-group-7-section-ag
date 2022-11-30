@@ -9,6 +9,12 @@ earth_land_temp_df <- read_csv(url(file))
 
 # http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 
+
+earth_temp_simplifed <- earth_land_temp_df %>% select(-`Element Code`, -Element, -Unit)
+colnames(earth_temp_simplifed) <- c("Area Code", "Country", "Month Code", "Month Name", c(1961:2019))
+earth_temp_simplifed$`Month Code` <- earth_temp_simplifed$`Month Code` %% 100
+earth_temp_simplifed <- earth_temp_simplifed %>% filter(`Month Code` <= 12)
+
 # 1 - average temperature changes for each country for each month
 temp_change_country <- earth_land_temp_df %>% 
   filter(Element == "Temperature change", na.rm = TRUE) %>% 

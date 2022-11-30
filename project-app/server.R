@@ -30,13 +30,17 @@ shinyServer(function(input, output) {
   })
   
   output$temp_user_plot <- renderPlotly({
-    plot <- earth_land_temp_df %>%
+    
+    
+    # earth_land_temp_df <- earth_land_temp_df %>%  group_by(Country, `Month Code`, `Month Name`) %>% 
+    #   summarize()
+    
+    plot <- earth_temp_simplifed %>%
             select(input$temp_x_input, input$temp_y_input) %>% 
             filter(!is.na(input$temp_x_input) & !is.na(input$temp_y_input)) %>% 
             ggplot(mapping = aes_string(x = input$temp_x_input, y = input$temp_y_input)) +
-            geom_point() +
-            scale_x_continuous(labels = scales::comma) +
-            scale_y_continuous(labels = scales::comma) +
+            geom_col() +
+            #scale_y_continuous(labels = scales::comma) +
             labs(title = paste(input$exo_y_input, "vs", input$exo_x_input))
     
     ggplotly(plot)
