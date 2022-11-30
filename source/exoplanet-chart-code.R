@@ -33,7 +33,7 @@ planet_summary <- exoplanets %>%
   group_by(planet_name) %>% 
   summarize(num_stars = mean(num_stars, na.rm=T), 
             num_planets = mean(num_planets, na.rm=T),
-            discovery_method = unique(num_planets),
+            discovery_method = unique(discovery_method),
             discovery_year = unique(discovery_year),
             orbital_period_days = mean(orbital_period_days, na.rm=T),
             orbital_semi_maj_axis_au = mean(orbital_semi_maj_axis_au, na.rm=T),
@@ -43,7 +43,7 @@ planet_summary <- exoplanets %>%
             planet_mass_j = mean(planet_mass_j, na.rm=T),
             eccentricity = mean(eccentricity, na.rm=T),
             planet_equi_temp_k = mean(planet_equi_temp_k, na.rm=T),
-            spectral_type = mean(spectral_type, na.rm=T),
+            spectral_type = unique(spectral_type),
             stellar_eff_temp_k = mean(stellar_eff_temp_k, na.rm=T),
             stellar_rad_sol = mean(stellar_rad_sol, na.rm=T),
             stellar_mass_sol = mean(stellar_mass_sol, na.rm=T),

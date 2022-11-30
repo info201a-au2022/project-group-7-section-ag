@@ -299,17 +299,23 @@ overflow-y: auto;
 border: 1px solid #ddd;
 border-radius: 4px;
 }
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-content: "\e259";
+.tabset-dropdown > .nav-tabs > li.active:before {
+content: "";
 font-family: 'Glyphicons Halflings';
 display: inline-block;
 padding: 10px;
 border-right: 1px solid #ddd;
 }
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-content: "\e258";
-font-family: 'Glyphicons Halflings';
+content: "";
 border: none;
+}
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+content: "";
+font-family: 'Glyphicons Halflings';
+display: inline-block;
+padding: 10px;
+border-right: 1px solid #ddd;
 }
 .tabset-dropdown > .nav-tabs > li.active {
 display: block;
@@ -365,35 +371,34 @@ research questions. The <strong><em>first two values</em></strong> were
 taken from <code>earth-land-temps.csv</code>. <strong>Value 1</strong>
 (<code>highest_month_value</code>) includes the month and value of the
 highest temperature change across all years and countries recorded:
-<strong>March: 0.6</strong>. <strong>Value 2</strong>
+<code>March: 0.6</code>. <strong>Value 2</strong>
 (<code>lowest_month_val</code>) includes the month and value of the
 lowest temperature change across all years and countries recorded:
-<strong>December: 0.43</strong>. These values show the narrow range of
+<code>December: 0.43</code>. These values show the narrow range of
 temperature increases throughout the year and when higher temperature
 increases occurred to find connections between temperature increase and
 time of year. The <strong><em>next three values</em></strong> were taken
 from <code>exoplanets.csv</code>. <strong>Value 3</strong>
 (<code>percent_bigger</code>) is the percent of exoplanets bigger than
-the Earth (<strong>95.39%</strong>) and <strong>Value 4</strong>
+the Earth (<em>95.39%</em>) and <strong>Value 4</strong>
 (<code>percent_smaller</code>) is the percent smaller than Earth
-(<strong>4.61%</strong>). These percentages are important in learning
-about the features that can make exoplanets habitable and giving an idea
-of the likelihood of finding them. <strong>Value 5</strong>
+(<em>4.61%</em>). These percentages are important in learning about the
+features that can make exoplanets habitable and giving an idea of the
+likelihood of finding them. <strong>Value 5</strong>
 (<code>percent_habitable</code>) is the chance we will find a habitable
-exoplanet given the ones in the dataset: <strong>0.81%</strong>. This
-gives viewers a better understanding of the difficulty in finding other
+exoplanet given the ones in the dataset: <em>0.81%</em>. This gives
+viewers a better understanding of the difficulty in finding other
 habitable planets. The <strong><em>last two values</em></strong> were
 taken from <code>fires.csv</code>. <strong>Value 6</strong>
 (<code>fire_diff</code>) is the difference between the number of fires
-in the earliest recorded year (1992) and latest (2015):
-<strong>30,811</strong>. <strong>Value 7</strong>
-(<code>percent_diff</code>) is the percent difference between fires from
-the earliest and latest years (1992-2015): <strong>99.38%</strong>.
-These values are important as they clearly reflect the dramatic increase
-in fires in just over thirty years. The numerical increase and
-percentages both reflect how dramatic the change is in different ways.
-We can also see all the summary values displayed in the dataframe
-<code>summary_info_table</code>.</p>
+in the earliest recorded year (1992) and latest (2015): <em>30,811</em>.
+<strong>Value 7</strong> (<code>percent_diff</code>) is the percent
+difference between fires from the earliest and latest years (1992-2015):
+<em>99.38%</em>. These values are important as they clearly reflect the
+dramatic increase in fires in just over thirty years. The numerical
+increase and percentages both reflect how dramatic the change is in
+different ways. We can also see all the summary values displayed in the
+dataframe <code>summary_info_table</code>.</p>
 </div>
 <div id="summary-information-tables" class="section level2">
 <h2>Summary Information Tables</h2>
