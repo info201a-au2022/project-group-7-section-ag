@@ -8,14 +8,13 @@ source("../source/exoplanet-chart-code.R")
 #source("../source/Oceania_Temp_Change_Chart2.R")
 
 earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
-
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
-colnames(earth_temp_simplifed) <- c("area_code", "country", "month_code", "month_name", as.character(c(1961:2019)))
+colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
 earth_temp_simplifed$month_code <- earth_temp_simplifed$month_code %% 100
 earth_temp_simplifed <- earth_temp_simplifed %>% 
                         filter(month_code <= 12 & 
                                area_code != 182 &# "R\xe9union"
-                                 area_code != 107) %>% # "C\xf4te d'Ivoire"
+                               area_code != 107) %>% # "C\xf4te d'Ivoire"
                         arrange(country)
 
 exo_inputs <- sidebarPanel(
@@ -39,23 +38,23 @@ exo_inputs <- sidebarPanel(
 )
 
 temp_inputs <- sidebarPanel(
-  selectInput(
-    "temp_x_input",
-    "Select an x variable:",
-    choices = colnames(earth_temp_simplifed)[c(1, 3, 4)],
-    selected = "month_name"
-  ),
+  # selectInput(
+  #   "temp_x_input",
+  #   "Select an x variable:",
+  #   choices = colnames(earth_temp_simplifed)[c(1, 3, 4)],
+  #   selected = "month_name"
+  # ),
   selectInput(
     "temp_y_input",
     "Select a y variable:",
     choices = colnames(earth_temp_simplifed)[c(5:59)],
-    selected = "1961"
+    selected = "Y1961"
   ),
   selectInput(
-    "country",
+    "temp_country_input",
     "Select a country:",
     choices = unique(earth_temp_simplifed$country),
-    selected = "Afghanistan"
+    selected = "United States of America"
   )
 )
 
@@ -80,8 +79,8 @@ ui <- navbarPage("INFO201 Project App",
                                      
                                      sidebarLayout(
                                        temp_inputs,
-                                       mainPanel(textOutput("hello"))
-                                     )#plotlyOutput("temp_user_plot")
+                                       mainPanel(plotlyOutput("temp_user_plot"))
+                                     )#
                                      ),
                             tabPanel("Interactive 3")
                             )

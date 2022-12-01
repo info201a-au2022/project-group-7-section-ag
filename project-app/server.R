@@ -6,6 +6,16 @@ library(ggplot2)
 source("../source/exoplanet-chart-code.R")
 #source("../source/Oceania_Temp_Change_Chart2.R")
 
+earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
+earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
+colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
+earth_temp_simplifed$month_code <- earth_temp_simplifed$month_code %% 100
+earth_temp_simplifed <- earth_temp_simplifed %>% 
+                        filter(month_code <= 12 & 
+                               area_code != 182 &# "R\xe9union"
+                               area_code != 107) %>% # "C\xf4te d'Ivoire"
+                        arrange(country)
+
 # Define server logic
 shinyServer(function(input, output) {
   output$exo_user_plot <- renderPlotly({
@@ -31,17 +41,30 @@ shinyServer(function(input, output) {
     
   })
   
-  # output$temp_user_plot <- renderPlotly({
-  #   
-  #   plot <- earth_land_temp_df %>%
-  #           select(input$temp_x_input, input$temp_y_input) %>% 
-  #           filter(!is.na(input$temp_x_input) & !is.na(input$temp_y_input)) %>% 
-  #           ggplot(mapping = aes_string(x = input$temp_x_input, y = input$temp_y_input)) +
-  #           geom_col() +
-  #           #scale_y_continuous(labels = scales::comma) +
-  #           labs(title = paste(input$exo_y_input, "vs", input$exo_x_input))
-  #   
-  #   ggplotly(plot)
-  # })
+  output$temp_user_plot <- renderPlotly({
+
+    plot <- earth_temp_simplifed %>%
+            filter(country == input$temp_country_input) %>% 
+            select(month_name, input$temp_y_input) %>%
+            filter(!is.na(month_name) & !is.na(input$temp_y_input)) %>%
+            ggplot(mapping = aes_string(x = "month_name", y = input$temp_y_input)) +
+            geom_point() +
+            scale_x_discrete(limits = c("January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November",
+                                        "December"),
+                             labels = c("January" = "Jan", "February" = "Feb", "March" = "Mar",
+                                       "April" = "Apr", "May" = "May", "June"  = "Jun",
+                                       "July" = "Jul", "August" = "Aug", "September" = "Sep",
+                                       "October" = "Oct", "November" = "Nov", "December" = "Dec")
+                             ) +
+            labs(title = paste(input$temp_country_input,
+                               "Temperature Change in",
+                               substr(input$temp_y_input, 2, 5)),
+                 x = "Month",
+                 y = ""
+                 )
+
+    ggplotly(plot)
+  })
   
 })
