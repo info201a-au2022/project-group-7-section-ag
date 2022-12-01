@@ -3,17 +3,11 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
+#file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
 
 earth_land_temp_df <- read_csv(url(file))
 
 # http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
-
-
-earth_temp_simplifed <- earth_land_temp_df %>% select(-`Element Code`, -Element, -Unit)
-colnames(earth_temp_simplifed) <- c("Area Code", "Country", "Month Code", "Month Name", c(1961:2019))
-earth_temp_simplifed$`Month Code` <- earth_temp_simplifed$`Month Code` %% 100
-earth_temp_simplifed <- earth_temp_simplifed %>% filter(`Month Code` <= 12)
 
 # 1 - average temperature changes for each country for each month
 temp_change_country <- earth_land_temp_df %>% 
@@ -76,4 +70,3 @@ lowest_month <- monthly_avg_change %>%
 lowest_val <- round(lowest_val, digits = 2)
 
 lowest_month_val <- paste0(lowest_month, ": ", lowest_val)
-

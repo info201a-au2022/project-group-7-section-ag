@@ -1,8 +1,10 @@
+library(tidyverse)
 library(shiny)
 library(plotly)
 library(ggplot2)
 
 source("../source/exoplanet-chart-code.R")
+#source("../source/Oceania_Temp_Change_Chart2.R")
 
 # Define server logic
 shinyServer(function(input, output) {
@@ -29,21 +31,17 @@ shinyServer(function(input, output) {
     
   })
   
-  output$temp_user_plot <- renderPlotly({
-    
-    
-    # earth_land_temp_df <- earth_land_temp_df %>%  group_by(Country, `Month Code`, `Month Name`) %>% 
-    #   summarize()
-    
-    plot <- earth_temp_simplifed %>%
-            select(input$temp_x_input, input$temp_y_input) %>% 
-            filter(!is.na(input$temp_x_input) & !is.na(input$temp_y_input)) %>% 
-            ggplot(mapping = aes_string(x = input$temp_x_input, y = input$temp_y_input)) +
-            geom_col() +
-            #scale_y_continuous(labels = scales::comma) +
-            labs(title = paste(input$exo_y_input, "vs", input$exo_x_input))
-    
-    ggplotly(plot)
-  })
+  # output$temp_user_plot <- renderPlotly({
+  #   
+  #   plot <- earth_land_temp_df %>%
+  #           select(input$temp_x_input, input$temp_y_input) %>% 
+  #           filter(!is.na(input$temp_x_input) & !is.na(input$temp_y_input)) %>% 
+  #           ggplot(mapping = aes_string(x = input$temp_x_input, y = input$temp_y_input)) +
+  #           geom_col() +
+  #           #scale_y_continuous(labels = scales::comma) +
+  #           labs(title = paste(input$exo_y_input, "vs", input$exo_x_input))
+  #   
+  #   ggplotly(plot)
+  # })
   
 })
