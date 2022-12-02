@@ -5,7 +5,6 @@ library(ggplot2)
 library(utf8)
 
 source("../source/exoplanet-chart-code.R")
-#source("../source/Oceania_Temp_Change_Chart2.R")
 
 earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
@@ -16,6 +15,9 @@ earth_temp_simplifed <- earth_temp_simplifed %>%
                                area_code != 182 &# "R\xe9union"
                                area_code != 107) %>% # "C\xf4te d'Ivoire"
                         arrange(country)
+
+source("../source/fires_charts.R")
+fires <- drop_na(fires)
 
 exo_inputs <- sidebarPanel(
   selectInput(
@@ -38,12 +40,6 @@ exo_inputs <- sidebarPanel(
 )
 
 temp_inputs <- sidebarPanel(
-  # selectInput(
-  #   "temp_x_input",
-  #   "Select an x variable:",
-  #   choices = colnames(earth_temp_simplifed)[c(1, 3, 4)],
-  #   selected = "month_name"
-  # ),
   selectInput(
     "temp_y_input",
     "Select a y variable:",
@@ -55,6 +51,15 @@ temp_inputs <- sidebarPanel(
     "Select a country:",
     choices = unique(earth_temp_simplifed$country),
     selected = "United States of America"
+  )
+)
+
+fire_inputs <- sidebarPanel(
+  selectInput(
+    "fire_year_input",
+    "Select a year to map:",
+    choices = str_to_title(sort(unique(fires$state))),
+    selected = "Washington"
   )
 )
 
@@ -76,11 +81,16 @@ ui <- navbarPage("INFO201 Project App",
                                        exo_inputs,
                                        mainPanel(plotlyOutput("exo_user_plot"))
                                      ),
-                                     
                                      sidebarLayout(
                                        temp_inputs,
                                        mainPanel(plotlyOutput("temp_user_plot"))
-                                     )#
+                                     ),
+                                     
+                                     sidebarLayout(
+                                       fire_inputs,
+                                       mainPanel(p("hello"))
+                                     )
+                                     
                                      ),
                             tabPanel("Interactive 3")
                             )
