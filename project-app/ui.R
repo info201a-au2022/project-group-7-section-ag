@@ -58,10 +58,32 @@ fire_inputs <- sidebarPanel(
   selectInput(
     "fire_year_input",
     "Select a year to map:",
-    choices = str_to_title(sort(unique(fires$state))),
-    selected = "Washington"
+    choices = sort(unique(fires$year)),
+    selected = 1992
   )
 )
+
+explore_data <- tabPanel("Data Exploration",
+                         titlePanel("Data Exploration"),
+                         h4("We can only cover a small amount of research questions, so
+                                        this page is for you to do some data exploration of your own.
+                                        By configuring the chart options, this page allows you to 
+                                        focus on questions and comparisons you might be interested in.
+                                        Use the options on the left to configure it's corresponding
+                                        graph."),
+                         sidebarLayout(
+                           exo_inputs,
+                           mainPanel(plotlyOutput("exo_user_plot"))
+                         ),
+                         sidebarLayout(
+                           temp_inputs,
+                           mainPanel(plotlyOutput("temp_user_plot"))
+                         ),
+                         sidebarLayout(
+                           fire_inputs,
+                           mainPanel(plotlyOutput("fire_user_map"))
+                         )
+                )
 
 ui <- navbarPage("INFO201 Project App",
                  tabPanel("Introduction"),
@@ -69,35 +91,10 @@ ui <- navbarPage("INFO201 Project App",
                  tabPanel("Report"),
                  navbarMenu("Interactives",
                             tabPanel("Interactive 1"),
-                            tabPanel("Data Exploration",
-                                     titlePanel("Data Exploration"),
-                                     h4("We can only cover a small amount of research questions, so
-                                        this page is for you to do some data exploration of your own.
-                                        By configuring the chart options, this page allows you to 
-                                        focus on questions and comparisons you might be interested in.
-                                        Use the options on the left to configure it's corresponding
-                                        graph."),
-                                     sidebarLayout(
-                                       exo_inputs,
-                                       mainPanel(plotlyOutput("exo_user_plot"))
-                                     ),
-                                     sidebarLayout(
-                                       temp_inputs,
-                                       mainPanel(plotlyOutput("temp_user_plot"))
-                                     ),
-                                     
-                                     sidebarLayout(
-                                       fire_inputs,
-                                       mainPanel(p("hello"))
-                                     )
-                                     
-                                     ),
+                            explore_data,
                             tabPanel("Interactive 3")
                             )
-)
-
-
-# chart_compare <- tabPanel()
+      )
 
 # Define UI for application 
 shinyUI(fluidPage(

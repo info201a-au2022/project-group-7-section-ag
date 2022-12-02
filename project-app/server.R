@@ -2,9 +2,10 @@ library(tidyverse)
 library(shiny)
 library(plotly)
 library(ggplot2)
+library(maps)
+library(mapproj)
 
 source("../source/exoplanet-chart-code.R")
-#source("../source/Oceania_Temp_Change_Chart2.R")
 
 earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
@@ -15,6 +16,9 @@ earth_temp_simplifed <- earth_temp_simplifed %>%
                                area_code != 182 &# "R\xe9union"
                                area_code != 107) %>% # "C\xf4te d'Ivoire"
                         arrange(country)
+
+source("../source/fires_charts.R")
+fires <- drop_na(fires)
 
 # Define server logic
 shinyServer(function(input, output) {
@@ -42,7 +46,6 @@ shinyServer(function(input, output) {
   })
   
   output$temp_user_plot <- renderPlotly({
-
     plot <- earth_temp_simplifed %>%
             filter(country == input$temp_country_input) %>% 
             select(month_name, input$temp_y_input) %>%
@@ -65,6 +68,33 @@ shinyServer(function(input, output) {
                  )
 
     ggplotly(plot)
+  })
+  
+  output$fire_user_map <- renderPlotly({
+    state_df <- fires %>%
+      filter(year == input$fire_year_input) %>%
+      group_by(state) %>%
+      summarize(count = n())
+    
+    state_year <- map_data("state") %>%
+      rename(state = region) %>%
+      left_join(state_df, by = "state")
+    
+    map_year <- ggplot(state_year) +
+      geom_polygon(
+        mapping = aes(x = long, y = lat, group = group, fill = count),
+        color = "black",
+        size = .1
+      ) +
+      coord_map() +
+      scale_fill_continuous(low = "#FFF4B0", high = "#CE0C00", limits = c(0, 6000)) +
+      labs(fill = "# of Fires") +
+      theme(legend.key.size = unit(0.4, 'cm')) +
+      labs(title = paste("US Fires in", input$fire_year_input)) +
+      theme(plot.title = element_text(size = 12)) +
+      xlab("") + ylab("")
+    
+    ggplotly(map_year)
   })
   
 })
