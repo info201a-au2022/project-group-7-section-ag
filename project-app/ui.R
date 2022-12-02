@@ -65,12 +65,11 @@ fire_inputs <- sidebarPanel(
 
 explore_data <- tabPanel("Data Exploration",
                          titlePanel("Data Exploration"),
-                         h4("We can only cover a small amount of research questions, so
-                                        this page is for you to do some data exploration of your own.
-                                        By configuring the chart options, this page allows you to 
-                                        focus on questions and comparisons you might be interested in.
-                                        Use the options on the left to configure it's corresponding
-                                        graph."),
+                         h4("We can only cover a small amount of research questions, so this page
+                             is for you to do some data exploration of your own. By configuring the
+                             chart options, this page allows you to focus on questions and
+                             comparisons you might be interested in. Use the options on the left to
+                             configure it's corresponding graph."),
                          sidebarLayout(
                            exo_inputs,
                            mainPanel(plotlyOutput("exo_user_plot"))
