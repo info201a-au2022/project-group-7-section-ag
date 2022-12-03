@@ -5,7 +5,8 @@ library(ggplot2)
 
 #file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
 
-earth_land_temp_df <- read_csv(url(file))
+# earth_land_temp_df <- read_csv(url(file))
+earth_land_temp_df <- read_csv("../data/earth-land-temps.csv")
 
 # http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 
