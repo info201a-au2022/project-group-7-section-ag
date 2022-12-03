@@ -84,9 +84,35 @@ explore_data <- tabPanel("Data Exploration",
                          )
                 )
 
+takeaways <- tabPanel(
+             "Conclusions",
+             titlePanel("Conclusions"),
+             h4("Surface Temperature"),
+             p("We can see that every country on Earth has experienced an increase in surface
+               temperature with a very small number of countries that have experienced a decrease
+               in temperature. This increase will likely build over many years until someday
+               Earth’s conditions may become too extreme for humans to comfortably live in. We can
+               use this trend to motivate that we as a species will eventually have to leave Earth
+               in search for a new home."),
+             h4("Fires"),
+             p("The increase in fires that is shown by the US maps as time progresses supports the
+               change in climate that we have all felt as well as the temperature increases revealed
+               in the surface temperature data. With the increase in overall temperatures, it’s only
+               a matter of time before the fire hotspots increase and not just in the places that are
+               known for them."),
+             h4("Exoplanets"),
+             p("One of the biggest (and slightly depressing) things we can learn from comparing
+               different exoplanet charts is that there aren’t really a lot of exoplanets out there
+               that would be comfortable for humans to live on in terms of temperature. In the
+               dataset we explored, only 41 of the 5044 exoplanets are at a habitable temperature.
+               That is only a 0.81% chance of arriving at a habitable exoplanet, however, 0.81% does
+               not even take into account what the weather is like on the exoplanet. Extreme weather
+               can make the planet uninhabitable even though it has a habitable surface temperature.")
+)
+
 ui <- navbarPage("INFO201 Project App",
                  tabPanel("Introduction"),
-                 tabPanel("Takeaways"),
+                 takeaways,
                  tabPanel("Report"),
                  navbarMenu("Interactives",
                             tabPanel("Interactive 1"),
