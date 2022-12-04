@@ -5,9 +5,9 @@ account: kelliannramirez
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7809255
-bundleId: 6590065
+bundleId: 6590193
 url: https://kelliannramirez.shinyapps.io/project-app/
-when: 1670185954.44784
-lastSyncTime: 1670185954.44785
+when: 1670189144.97566
+lastSyncTime: 1670189144.97568
 asMultiple: FALSE
 asStatic: FALSE

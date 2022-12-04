@@ -11,6 +11,7 @@ library(maps)
 library(mapproj)
 library(leaflet)
 library(readr)
+library(shinythemes)
 
 # KelliAnn
 #source("../source/exoplanet-chart-code.R")
@@ -278,5 +279,6 @@ ui <- navbarPage("INFO201 Project App",
 
 # App 
 shinyUI(fluidPage(
+  theme = shinytheme("darkly"),
   ui
 ))
