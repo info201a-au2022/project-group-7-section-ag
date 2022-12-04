@@ -9,6 +9,8 @@ library(reshape2)
 library(shinyWidgets)
 library(maps)
 library(mapproj)
+library(leaflet)
+library(readr)
 
 # KelliAnn
 #source("../source/exoplanet-chart-code.R")
@@ -235,6 +237,32 @@ widgets_page <- tabPanel(
   sidebarLayout(plot_sidebar, plot_main),
   sidebarLayout(chart_sidebar, chart_main)
 )
+# Claire
+fire_input <- sidebarPanel(
+  selectInput(
+    inputId = "fireyear",
+    label = "Select year",
+    choices = c("2005","2006","2007","2008", "2009", "2010", "2011", "2012", "2013", "2014","2015")
+  )
+)
+
+fire_map <- mainPanel(
+  leafletOutput("distPlot")
+)
+
+
+temp_plot <- mainPanel( 
+  plotlyOutput(outputId = "tempplot")
+)
+
+widgets <- tabPanel(
+  "Climate Change Visualizations",
+  sidebarLayout(
+    fire_input, fire_map
+  ), 
+  temp_plot
+)
+
 
 # UI
 ui <- navbarPage("INFO201 Project App",
@@ -242,7 +270,7 @@ ui <- navbarPage("INFO201 Project App",
                  takeaways,
                  tabPanel("Report"),
                  navbarMenu("Interactives",
-                            tabPanel("Interactive 3"),
+                            widgets,
                             widgets_page,
                             explore_data,
                             )

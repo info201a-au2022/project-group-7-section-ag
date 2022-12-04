@@ -8,6 +8,7 @@ library(maps)
 library(mapproj)
 library(reshape2)
 library(shinyWidgets)
+library(leaflet)
 
 # KelliAnn
 #source("../source/exoplanet-chart-code.R")
@@ -145,7 +146,80 @@ shinyServer(function(input, output) {
            x = "Exoplanet Name", y = "Orbital Period (Days)") +
       scale_fill_discrete(name = "Exoplanet")
   })
+  # Claire
+  output$distPlot <- renderLeaflet({
+    fires<- read.csv("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/fires.csv",stringsAsFactors = FALSE) 
+    #View(fires)
+    
+    # Mutating dataframe
+    fires <- fires %>%
+      rename(year = FIRE_YEAR, date = DISCOVERY_DATE, state = STATE, latitude = LATITUDE, longitude = LONGITUDE, cause = STAT_CAUSE_DESCR, fire_size = FIRE_SIZE) %>%
+      mutate(month = format(as.Date(date, format = "%Y-%m-%d"),"%m")) %>%
+      mutate(state = state.name[match(state, state.abb)]) %>%
+      mutate(state = tolower(state))
+    
+    # Test dataframe
+    map_df <- fires %>%
+      select(year, date, cause, fire_size, latitude, longitude, state, month) %>%
+      group_by(year)
+    
+    #View(map_df)
+    
+    large_fires <- map_df %>% 
+      filter(year == input$fireyear)%>%
+      filter(fire_size > 500) %>%
+      mutate(radius = fire_size/10000)
+    
+    map_1 <- leaflet(large_fires) %>%
+      addTiles()
+    
+    map_1 <- map_1 %>%
+      addCircleMarkers(
+        lat = ~latitude,
+        lng = ~longitude,
+        stroke = FALSE,
+        radius = ~radius,
+        fillOpacity = 0.4,
+        popup = paste0("Cause: ", large_fires$cause, ", ",
+                       "Date: ", large_fires$date),
+        color = "#FF6030"
+      )
+    
+    map_1
+    
+  })
   
+  output$tempplot <- renderPlotly({
+    file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
+    earth_land_temp_df <- read_csv(url(file))
+    
+    earth_land_temp_df <- earth_land_temp_df %>%
+      filter(Element == "Temperature change")
+    
+    colnames(earth_land_temp_df) <- gsub("Y", "", colnames(earth_land_temp_df))
+    
+    test <- data.frame(colMeans(earth_land_temp_df[, 8:66], na.rm = TRUE)) %>%
+      rename(avg_temp_change = colMeans.earth_land_temp_df...8.66...na.rm...TRUE.)
+    
+    test <- test %>%
+      mutate(year = row.names(test), test, row.names = NULL)
+    
+    plot_ly(
+      data = test,
+      x = ~year,
+      y = ~avg_temp_change,
+      color = ~avg_temp_change,
+      type = "scatter",
+      mode = "markers",
+      text = ~paste("Year: ", year, "Change in Temperature: ", round(avg_temp_change, digits = 2), "(°C)")
+    ) %>%
+      layout(
+        title = "Yearly Average Temperature Change Across All Countries 1961-2019",
+        xaxis = list(title = "Year"),
+        yaxis = list(title = "Average Temperature Change (°C)")
+      )
+    
+  })
   # KelliAnn
   output$exo_user_plot <- renderPlotly({
     plot <- planet_summary %>% 
