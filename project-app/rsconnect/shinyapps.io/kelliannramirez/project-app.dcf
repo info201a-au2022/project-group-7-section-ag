@@ -1,0 +1,13 @@
+name: project-app
+title: project-app
+username:
+account: kelliannramirez
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7809255
+bundleId: 6590023
+url: https://kelliannramirez.shinyapps.io/project-app/
+when: 1670185067.25095
+lastSyncTime: 1670185067.25096
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,7 +1,8 @@
 library(readr)
 
 # INFO201 Project Source Code for exoplanets.csv
-exoplanets <- read_csv('../data/exoplanets.csv')
+#exoplanets <- read_csv('../data/exoplanets.csv')
+exoplanets <- read_csv(url("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"))
 
 # select columns that we might care about
 exoplanets <- exoplanets %>% select(pl_name, hostname, sy_snum, sy_pnum, 

@@ -2,16 +2,19 @@ library(tidyverse)
 library(shiny)
 library(plotly)
 library(ggplot2)
+library(dplyr)
+library(rsconnect)
 library(maps)
 library(mapproj)
-library(utf8)
-library(dplyr)
-library(shinyWidgets)
 
 # KelliAnn
-source("../source/exoplanet-chart-code.R")
+#source("../source/exoplanet-chart-code.R")
 
-earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
+file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
+
+earth_temp_simplifed <- read_csv(url(file))
+
+#earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
 colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
 earth_temp_simplifed$month_code <- earth_temp_simplifed$month_code %% 100
@@ -21,19 +24,14 @@ earth_temp_simplifed <- earth_temp_simplifed %>%
                                area_code != 107) %>% # "C\xf4te d'Ivoire"
                         arrange(country)
 
-source("../source/fires_charts.R")
+#source("../source/fires_charts.R")
+fires <- read.csv("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/fires.csv")
 fires <- drop_na(fires)
-
-# Salley
-exoplanets_df <- read_csv("~/Documents/info201/project-group-7-section-ag/data/exoplanets.csv")
-
-planet_year_df <- exoplanets_df %>%
-  select(pl_name, disc_year, discoverymethod) %>%
-  group_by(discoverymethod) %>%
-  dcast(disc_year ~ discoverymethod)
-
-planet_facility_df <- exoplanets_df %>% 
-  select(pl_name, disc_facility, pl_orbper, pl_rade, pl_bmasse, pl_eqt)
+fires <- fires %>%
+  rename(year = FIRE_YEAR, date = DISCOVERY_DATE, state = STATE) %>%
+  mutate(month = format(as.Date(date, format = "%Y-%m-%d"),"%m")) %>%
+  mutate(state = state.name[match(state, state.abb)]) %>%
+  mutate(state = tolower(state))
 
 # Define server logic
 shinyServer(function(input, output) {
@@ -111,40 +109,6 @@ shinyServer(function(input, output) {
                 xlab("") + ylab("")
     
     ggplotly(map_year)
-  })
-  
-  # Salley
-  output$linegraph <- renderPlotly({
-    filtered_planet_df <- planet_year_df %>% 
-      filter(disc_year >= input$minyear, na.rm = TRUE) %>% 
-      filter(disc_year <= input$maxyear, na.rm = TRUE) %>% 
-      group_by(disc_year) %>% 
-      add_count(name = "num_planets") %>% 
-      select(disc_year, input$discovery) %>% 
-      melt(id.vars = "disc_year")
-    p <- ggplot(data = filtered_planet_df, aes(x = disc_year, y = value,
-                                               color = variable)) +
-      geom_line() +
-      xlim(input$minyear, input$maxyear) +
-      labs(x = "Year", y = "Number of Planets") +
-      scale_color_discrete(name = "Discovery Method") +
-      ggtitle("Number of Exoplanets Discovered Per Year")
-  })
-  # Salley
-  output$barchart <- renderPlotly({
-    pl_df <- planet_facility_df %>% 
-      filter(disc_facility == input$facility, na.rm = TRUE) %>%
-      select(pl_name, disc_facility, pl_orbper) %>%
-      drop_na(pl_orbper) %>% 
-      group_by(pl_name) %>% 
-      summarise(new = round(mean(pl_orbper), digits = 2))
-    p1 <- ggplot(data = pl_df, aes(x = pl_name, y = new, fill = pl_name)) +
-      geom_col() +
-      coord_flip() +
-      labs(title = "Orbital Period of Exoplanets",
-           subtitle = "Discovered at a Selected Facility",
-           x = "Exoplanet Name", y = "Orbital Period (Days)") +
-      scale_fill_discrete(name = "Exoplanet")
   })
   
 })
