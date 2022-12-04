@@ -5,6 +5,7 @@ library(ggplot2)
 library(maps)
 library(mapproj)
 
+# KelliAnn
 source("../source/exoplanet-chart-code.R")
 
 earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
@@ -20,8 +21,20 @@ earth_temp_simplifed <- earth_temp_simplifed %>%
 source("../source/fires_charts.R")
 fires <- drop_na(fires)
 
+# Salley
+exoplanets_df <- read_csv("~/Documents/info201/project-group-7-section-ag/data/exoplanets.csv")
+
+planet_year_df <- exoplanets_df %>%
+  select(pl_name, disc_year, discoverymethod) %>%
+  group_by(discoverymethod) %>%
+  dcast(disc_year ~ discoverymethod)
+
+planet_facility_df <- exoplanets_df %>% 
+  select(pl_name, disc_facility, pl_orbper, pl_rade, pl_bmasse, pl_eqt)
+
 # Define server logic
 shinyServer(function(input, output) {
+  # KelliAnn
   output$exo_user_plot <- renderPlotly({
     plot <- planet_summary %>% 
       select(planet_name, input$exo_x_input, input$exo_y_input, planet_equi_temp_k) %>% 
@@ -44,7 +57,7 @@ shinyServer(function(input, output) {
     ggplotly(plot)
     
   })
-  
+  # KelliAnn
   output$temp_user_plot <- renderPlotly({
     plot <- earth_temp_simplifed %>%
             filter(country == input$temp_country_input) %>% 
@@ -69,7 +82,7 @@ shinyServer(function(input, output) {
 
     ggplotly(plot)
   })
-  
+  # KelliAnn
   output$fire_user_map <- renderPlotly({
     state_df <- fires %>%
                 filter(year == input$fire_year_input) %>%
@@ -95,6 +108,40 @@ shinyServer(function(input, output) {
                 xlab("") + ylab("")
     
     ggplotly(map_year)
+  })
+  
+  # Salley
+  output$linegraph <- renderPlotly({
+    filtered_planet_df <- planet_year_df %>% 
+      filter(disc_year >= input$minyear, na.rm = TRUE) %>% 
+      filter(disc_year <= input$maxyear, na.rm = TRUE) %>% 
+      group_by(disc_year) %>% 
+      add_count(name = "num_planets") %>% 
+      select(disc_year, input$discovery) %>% 
+      melt(id.vars = "disc_year")
+    p <- ggplot(data = filtered_planet_df, aes(x = disc_year, y = value,
+                                               color = variable)) +
+      geom_line() +
+      xlim(input$minyear, input$maxyear) +
+      labs(x = "Year", y = "Number of Planets") +
+      scale_color_discrete(name = "Discovery Method") +
+      ggtitle("Number of Exoplanets Discovered Per Year")
+  })
+  # Salley
+  output$barchart <- renderPlotly({
+    pl_df <- planet_facility_df %>% 
+      filter(disc_facility == input$facility, na.rm = TRUE) %>%
+      select(pl_name, disc_facility, pl_orbper) %>%
+      drop_na(pl_orbper) %>% 
+      group_by(pl_name) %>% 
+      summarise(new = round(mean(pl_orbper), digits = 2))
+    p1 <- ggplot(data = pl_df, aes(x = pl_name, y = new, fill = pl_name)) +
+      geom_col() +
+      coord_flip() +
+      labs(title = "Orbital Period of Exoplanets",
+           subtitle = "Discovered at a Selected Facility",
+           x = "Exoplanet Name", y = "Orbital Period (Days)") +
+      scale_fill_discrete(name = "Exoplanet")
   })
   
 })

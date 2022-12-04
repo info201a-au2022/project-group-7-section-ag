@@ -6,6 +6,7 @@ library(utf8)
 
 source("../source/exoplanet-chart-code.R")
 
+#KelliAnn
 earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
 colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
@@ -110,18 +111,53 @@ takeaways <- tabPanel(
                can make the planet uninhabitable even though it has a habitable surface temperature.")
 )
 
+# Salley
+plot_sidebar <- sidebarPanel(
+  sliderInput(inputId = "minyear", label = "Min Year",
+              min = 1988, max = 2021, value = 1988),
+  sliderInput(inputId = "maxyear", label = "Max Year",
+              min = 1989, max = 2022, value = 2022),
+  pickerInput(inputId = "discovery", label = "Choose Methods to Compare",
+              multiple = TRUE, choices = colnames(planet_year_df)[2:12],
+              selected = colnames(planet_year_df)[2:4],
+              options = list(`selected-text-format`= "static",
+                             title = "Select at least one discovery method"))
+)
+
+plot_main <- mainPanel(
+  plotlyOutput("linegraph")
+)
+
+chart_sidebar <- sidebarPanel(
+  selectInput(
+    inputId = "facility", label = "Pick a Facility",
+    choices = unique(planet_facility_df$disc_facility)
+  )
+)
+
+chart_main <- mainPanel(
+  plotlyOutput("barchart")
+)
+
+widgets_page <- tabPanel(
+  "Line Graph & ___",
+  sidebarLayout(plot_sidebar, plot_main),
+  sidebarLayout(chart_sidebar, chart_main)
+)
+
+# UI
 ui <- navbarPage("INFO201 Project App",
                  tabPanel("Introduction"),
                  takeaways,
                  tabPanel("Report"),
                  navbarMenu("Interactives",
-                            tabPanel("Interactive 1"),
+                            widgets_page,
                             explore_data,
                             tabPanel("Interactive 3")
                             )
       )
 
-# Define UI for application 
+# App 
 shinyUI(fluidPage(
   ui
 ))
