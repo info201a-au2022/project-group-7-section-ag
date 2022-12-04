@@ -6,6 +6,7 @@ library(ggplot2)
 file = "https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/earth-land-temps.csv"
 
 earth_land_temp_df <- read_csv(url(file))
+#earth_land_temp_df <- read_csv("../data/earth-land-temps.csv")
 
 # http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 
@@ -15,8 +16,6 @@ temp_change_country <- earth_land_temp_df %>%
   group_by(`Area Code`, Area, `Months Code`, Months) %>% 
   select(starts_with('Y')) %>% 
   mutate(avg_change = rowMeans(across(starts_with('Y')), na.rm = TRUE))
-
-temp_country_plot <- plot(temp_change_country$avg_change)
 
 # 2 - groups countries by continent and displays avg change per country for all months
 oceania_temp_change <- temp_change_country %>% 
@@ -38,15 +37,12 @@ oceania_bar_graph <- ggplot(oceania_temp_change, aes(x=Area, y=avg_change)) +
   geom_bar(stat="identity", color="black", fill="darkolivegreen4") +
   ggtitle("Oceania Temperature Change") +
   coord_flip()
-oceania_bar_graph
 
 # 5 - average temperature change for each country for all months
 yearly_avg_change <- temp_change_country %>% 
   group_by(`Area Code`, Area) %>% 
   select(avg_change) %>% 
   summarise(avg_change_total = mean(avg_change))
-
-yearly_avg_plot <- plot(yearly_avg_change$avg_change_total)
 
 # 6 - average temperature change for all countries per month
 monthly_avg_change <- temp_change_country %>% 
@@ -75,4 +71,3 @@ lowest_month <- monthly_avg_change %>%
 lowest_val <- round(lowest_val, digits = 2)
 
 lowest_month_val <- paste0(lowest_month, ": ", lowest_val)
-

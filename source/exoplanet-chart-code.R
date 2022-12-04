@@ -1,7 +1,8 @@
 library(readr)
 
 # INFO201 Project Source Code for exoplanets.csv
-exoplanets <- read_csv('../data/exoplanets.csv')
+#exoplanets <- read_csv('../data/exoplanets.csv')
+exoplanets <- read_csv(url("https://raw.githubusercontent.com/info201a-au2022/project-group-7-section-ag/main/data/exoplanets.csv"))
 
 # select columns that we might care about
 exoplanets <- exoplanets %>% select(pl_name, hostname, sy_snum, sy_pnum, 
@@ -33,7 +34,7 @@ planet_summary <- exoplanets %>%
   group_by(planet_name) %>% 
   summarize(num_stars = mean(num_stars, na.rm=T), 
             num_planets = mean(num_planets, na.rm=T),
-            discovery_method = unique(num_planets),
+            discovery_method = unique(discovery_method),
             discovery_year = unique(discovery_year),
             orbital_period_days = mean(orbital_period_days, na.rm=T),
             orbital_semi_maj_axis_au = mean(orbital_semi_maj_axis_au, na.rm=T),
@@ -43,7 +44,7 @@ planet_summary <- exoplanets %>%
             planet_mass_j = mean(planet_mass_j, na.rm=T),
             eccentricity = mean(eccentricity, na.rm=T),
             planet_equi_temp_k = mean(planet_equi_temp_k, na.rm=T),
-            spectral_type = mean(spectral_type, na.rm=T),
+            spectral_type = unique(spectral_type),
             stellar_eff_temp_k = mean(stellar_eff_temp_k, na.rm=T),
             stellar_rad_sol = mean(stellar_rad_sol, na.rm=T),
             stellar_mass_sol = mean(stellar_mass_sol, na.rm=T),
@@ -75,7 +76,7 @@ planet_temp_count <- exoplanets %>% filter(!is.na(planet_equi_temp_k)) %>%
 # all planets, habitable or not
 bar_planet_temp_count <- planet_temp_count %>% 
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_col() +
-  labs(x="planet temperature")
+  labs(x="planet temperature") + ggtitle("All Exoplanet Temperatures")
 
 # chart works
 # line version graph above
@@ -98,7 +99,7 @@ habitable <- planet_summary %>%
 habitable_exoplanets <- planet_temp_count %>%
   ggplot(aes(x=planet_equi_temp_k, y=count)) + geom_bar(stat="identity") +
   xlim(273, 300) +
-  labs(x="planet temperature")
+  labs(x="planet temperature") + ggtitle("Possibly Habitable Exoplanet Temperatures")
 
 # chart works
 # a chart where each dot represents a planets radius in Earth radii and mass in Earth masses.
