@@ -5,6 +5,10 @@ library(ggplot2)
 library(dplyr)
 library(utf8)
 library(rsconnect)
+library(reshape2)
+library(shinyWidgets)
+library(maps)
+library(mapproj)
 
 # KelliAnn
 #source("../source/exoplanet-chart-code.R")
