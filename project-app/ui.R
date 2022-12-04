@@ -3,6 +3,8 @@ library(shiny)
 library(plotly)
 library(ggplot2)
 library(utf8)
+library(dplyr)
+library(shinyWidgets)
 
 source("../source/exoplanet-chart-code.R")
 
@@ -151,9 +153,9 @@ ui <- navbarPage("INFO201 Project App",
                  takeaways,
                  tabPanel("Report"),
                  navbarMenu("Interactives",
+                            tabPanel("Interactive 3"),
                             widgets_page,
                             explore_data,
-                            tabPanel("Interactive 3")
                             )
       )
 

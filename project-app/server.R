@@ -4,6 +4,9 @@ library(plotly)
 library(ggplot2)
 library(maps)
 library(mapproj)
+library(utf8)
+library(dplyr)
+library(shinyWidgets)
 
 # KelliAnn
 source("../source/exoplanet-chart-code.R")
