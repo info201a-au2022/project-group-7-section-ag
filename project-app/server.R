@@ -160,12 +160,9 @@ shinyServer(function(input, output) {
       select(year, date, cause, fire_size, latitude, longitude, state, month) %>%
       group_by(year)
     
-    #View(map_df)
-    
     large_fires <- map_df %>% 
       filter(year == input$fireyear)%>%
-      filter(fire_size > 500) %>%
-      mutate(radius = fire_size/10000)
+      filter(fire_size > 500)
     
     map_1 <- leaflet(large_fires) %>%
       addTiles()
@@ -175,7 +172,7 @@ shinyServer(function(input, output) {
         lat = ~latitude,
         lng = ~longitude,
         stroke = FALSE,
-        radius = ~radius,
+        radius = 4,
         fillOpacity = 0.4,
         popup = paste0("Cause: ", large_fires$cause, ", ",
                        "Date: ", large_fires$date),
