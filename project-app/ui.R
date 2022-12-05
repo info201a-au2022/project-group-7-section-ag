@@ -16,9 +16,9 @@ library(shinythemes)
 source("exoplanet-chart-code.R")
 source("Oceania_Temp_Change_Chart2.R")
 source("fires_charts.R")
-exoplanets <- read.csv(file = "exoplanets.csv")
-fires <- read.csv(file = "fires.csv")
-earth_land_temp_df <- read.csv(file = "earth-land-temps.csv")
+# exoplanets <- read.csv(file = "exoplanets.csv")
+# fires <- read.csv(file = "fires.csv")
+# earth_land_temp_df <- read.csv(file = "earth-land-temps.csv")
 
 #KelliAnn
 earth_temp_simplifed <- earth_land_temp_df %>% select(-`Element Code`, -Element, -Unit)
