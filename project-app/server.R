@@ -9,17 +9,6 @@ library(mapproj)
 library(reshape2)
 library(shinyWidgets)
 library(leaflet)
-<<<<<<< HEAD
-
-# KelliAnn
-source("exoplanet-chart-code.R")
-source("Oceania_Temp_Change_Chart2.R")
-source("fires_charts.R")
-exoplanets <- read.csv(file = "exoplanets.csv")
-fires <- read.csv(file = "fires.csv")
-earth_land_temp_df <- read.csv(file = "earth-land-temps.csv")
-=======
->>>>>>> f92459cef015333c7042ad3c65ec85b9a73cf541
 
 # KelliAnn
 #source("../source/exoplanet-chart-code.R")

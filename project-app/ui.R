@@ -13,26 +13,7 @@ library(leaflet)
 library(readr)
 library(shinythemes)
 
-<<<<<<< HEAD
-source("exoplanet-chart-code.R")
-source("Oceania_Temp_Change_Chart2.R")
-source("fires_charts.R")
-# exoplanets <- read.csv(file = "exoplanets.csv")
-# fires <- read.csv(file = "fires.csv")
-# earth_land_temp_df <- read.csv(file = "earth-land-temps.csv")
-
-#KelliAnn
-earth_temp_simplifed <- earth_land_temp_df %>% select(-`Element Code`, -Element, -Unit)
-colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
-earth_temp_simplifed$month_code <- earth_temp_simplifed$month_code %% 100
-earth_temp_simplifed <- earth_temp_simplifed %>% 
-                        filter(month_code <= 12 & 
-                               area_code != 182 &# "R\xe9union"
-                               area_code != 107) %>% # "C\xf4te d'Ivoire"
-                        arrange(country)
-=======
 source("dataframes_P3.R")
->>>>>>> f92459cef015333c7042ad3c65ec85b9a73cf541
 
 # KelliAnn
 exo_inputs <- sidebarPanel(
