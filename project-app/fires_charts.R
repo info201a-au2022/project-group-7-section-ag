@@ -34,7 +34,6 @@ state_df <- fires %>%
 state_shape <- map_data("state") %>%
   rename(state = region) %>%
   left_join(state_df, by = "state")
-View(state_shape)
 
 total_map <- ggplot(state_shape) +
   geom_polygon(

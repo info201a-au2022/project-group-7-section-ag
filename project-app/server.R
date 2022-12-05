@@ -9,11 +9,13 @@ library(mapproj)
 library(reshape2)
 library(shinyWidgets)
 library(leaflet)
-
 # KelliAnn
 source("exoplanet-chart-code.R")
-source("Oceania_Temp_Change_Chart2")
+source("Oceania_Temp_Change_Chart2.R")
 source("fires_charts.R")
+exoplanets <- read.csv(file = "exoplanets.csv")
+fires <- read.csv(file = "fires.csv")
+earth_land_temp_df <- read.csv(file = "earth-land-temps.csv")
 
 earth_temp_simplifed <- earth_land_temp_df %>% select(-`Element Code`, -Element, -Unit)
 colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
