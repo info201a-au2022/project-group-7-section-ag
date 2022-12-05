@@ -76,11 +76,8 @@ planet_summary$stellar_rad_sol[is.nan(planet_summary$stellar_rad_sol)] <- NA
 planet_summary$stellar_mass_sol[is.nan(planet_summary$stellar_mass_sol)] <- NA
 planet_summary$stellar_surf_grav[is.nan(planet_summary$stellar_surf_grav)] <- NA
 
-# file = "earth-land-temps.csv"
 
 earth_temp_simplifed <- read_csv("earth-land-temps.csv")
-
-#earth_temp_simplifed <- read_csv("../data/earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
 colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
 earth_temp_simplifed$month_code <- earth_temp_simplifed$month_code %% 100
