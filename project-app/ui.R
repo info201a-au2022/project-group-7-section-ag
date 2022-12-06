@@ -394,6 +394,12 @@ report <- tabPanel("Report",
                      are not fortune tellers who can see the future so what we say may not end up being 
                      true or actually happen. We just propose what we think is likely to happen based 
                      on the data we have collected."),
+                   h3("Findings"),
+                   p("paragraph goes here"),
+                   h3("Discussion"),
+                   p("paragraph goes here"),
+                   h3("Conclusion"),
+                   p("paragraph goes here"),
                    h3("Acknowledgements"),
                    p("Thank you to kaggle.com for providing a majority of our data and making it simple
                       to view and open on RStudio!"),
