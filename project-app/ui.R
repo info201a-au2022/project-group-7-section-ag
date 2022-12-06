@@ -220,8 +220,8 @@ report <- tabPanel("Report",
                    h3("Mission: Planet"),
                    p("Authors: KelliAnn Ramirez, Salley Fang, Claire Zhang",
                      "Affiliation: INFO-201 Technical Foundations of Informatics - The Information
-                      School - University of Washington",
-                     "Date: Autumn 2022"),
+                      School - University of Washington"),
+                   p("Date: Autumn 2022"),
                    h3("Abstract"),
                    p("We are concerned with the future of our planet and how it can be influenced
                       by space exploration. Climate changed has undoubtedly shaped the future of life
