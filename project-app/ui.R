@@ -171,24 +171,29 @@ fire_map <- mainPanel(
   leafletOutput("distPlot")
 )
 
+temp_input <- sidebarPanel(
+  sliderInput(inputId = "min_year", label = "Min Year",
+              min = 1961, max = 2018, value = 1970),
+  sliderInput(inputId = "max_year", label = "Max Year",
+              min = 1962, max = 2019, value = 2015)
+)
 
 temp_plot <- mainPanel( 
   plotlyOutput(outputId = "tempplot")
 )
 
-widgets <- tabPanel(
+widgets_climate <- tabPanel(
   "Climate Change Visualizations",
   h2("US Wildfires Mapped Over Time"),
   p("This map displays large wildfires in the US for a selected year.
     It shows the trend in the number of wildfires over time, as well as
     where wildfires tend to occur across the US."),
-  sidebarLayout(fire_input,
-                fire_map),
+  sidebarLayout(fire_input, fire_map),
   h2("Average Temperature Change Across All Countries Over Time"),
   p("This chart displays the yearly change in average temperature across the
     globe from 1961 to 2019, which shows the relatively large increases in
     recent years."),
-  temp_plot
+  sidebarLayout(temp_input, temp_plot)
 )
 
 
@@ -573,7 +578,7 @@ ui <- navbarPage("INFO201 Project App",
                  takeaways,
                  report,
                  navbarMenu("Interactives",
-                            widgets,
+                            widgets_climate,
                             widgets_page,
                             explore_data,
                  )

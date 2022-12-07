@@ -208,7 +208,10 @@ shinyServer(function(input, output) {
       rename(avg_temp_change = colMeans.earth_land_temp_df...8.66...na.rm...TRUE.)
     
     test <- test %>%
-      mutate(year = row.names(test), test, row.names = NULL)
+      mutate(year = row.names(test), test, row.names = NULL) %>% 
+      filter(year <= input$max_year, na.rm = TRUE) %>% 
+      filter(year >= input$min_year, na.rm = TRUE) %>% 
+      group_by(year)
     
     plot_ly(
       data = test,
