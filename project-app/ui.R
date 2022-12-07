@@ -193,6 +193,8 @@ widgets <- tabPanel(
 
 
 introduction <- tabPanel("Introduction",
+    img(src = "https://assets.newatlas.com/dims4/default/3168c10/2147483647/strip/true/crop/1080x720+0+180/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fearth-from-space-6.jpg",
+        width = "95%,", height = "95%"),
     h3("Problem Domain"),
     p("Our topic is about outer space, specifically how we can discover and study exoplanets
       and their surroundings to determine if they are habitable. Our topic concerns human
@@ -258,8 +260,6 @@ introduction <- tabPanel("Introduction",
       the analyzation and inclusion of data about the rapid climate change occurring may discourage
       people from taking part in slowing down its effects on Earth. Lastly, the concerns behind what
       we should do if we were to encounter life outside of Earth is important to consider."),
-    img(src = "https://assets.newatlas.com/dims4/default/3168c10/2147483647/strip/true/crop/1080x720+0+180/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fearth-from-space-6.jpg",
-          width = "95%,", height = "95%")
 )
 
 brief_intro <- tabPanel("Project Brief & Intro",
