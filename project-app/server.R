@@ -99,6 +99,19 @@ fires <- fires %>%
 # Define server logic
 shinyServer(function(input, output) {
   # Salley
+  output$dataset_df <- renderTable({
+    df <- data.frame("File Name" = rep(c("earth-land-temps.csv",
+                                   "exoplanets.csv",
+                                   "fires.csv")),
+               "Num Observations" = rep(c("6768", "32552", "597998")),
+               "Num Variables" = rep(c("63", "93", "21")),
+               "URL" = rep(c("https://www.kaggle.com/datasets/sevgisarac/temperature-change?select=Environment_Temperature_change_E_All_Data_NOFLAG.csv",
+                             "https://www.kaggle.com/datasets/sathyanarayanrao89/nasa-exoplanetary-system",
+                             "https://www.kaggle.com/datasets/chidmuthu/fires-clean")))
+    df
+  })
+              
+  # Salley
   exoplanets_df <- read_csv("exoplanets.csv")
   # Salley
   planet_year_df <- exoplanets_df %>%
@@ -195,7 +208,10 @@ shinyServer(function(input, output) {
       rename(avg_temp_change = colMeans.earth_land_temp_df...8.66...na.rm...TRUE.)
     
     test <- test %>%
-      mutate(year = row.names(test), test, row.names = NULL)
+      mutate(year = row.names(test), test, row.names = NULL) %>% 
+      filter(year <= input$max_year, na.rm = TRUE) %>% 
+      filter(year >= input$min_year, na.rm = TRUE) %>% 
+      group_by(year)
     
     plot_ly(
       data = test,

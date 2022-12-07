@@ -47,6 +47,7 @@ total_map <- ggplot(state_shape) +
   theme(legend.key.size = unit(0.4, 'cm')) +
   labs(title = "Total US Fires from 1992-2015") +
   theme(plot.title = element_text(size = 12))
+plot(total_map)
 
 # Fires by state in 1998 dataframe
 state_1998_df <- fires %>%
