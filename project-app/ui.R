@@ -82,8 +82,8 @@ explore_data <- tabPanel("Data Exploration",
 )
 
 takeaways <- tabPanel(
-  "Conclusions",
-  titlePanel("Conclusions"),
+  "Takeaways",
+  titlePanel("Takeaways"),
   h4("Surface Temperature"),
   p("We can see that every country on Earth has experienced an increase in surface
                temperature with a very small number of countries that have experienced a decrease
