@@ -90,3 +90,17 @@ planet_year_df <- exoplanets_df %>%
 
 planet_facility_df <- exoplanets_df %>%
   select(pl_name, disc_facility, pl_orbper, pl_rade, pl_bmasse, pl_eqt)
+
+# Claire
+earth_land_temp_df <- read_csv("earth-land-temps.csv")
+
+earth_land_temp_df <- earth_land_temp_df %>%
+  filter(Element == "Temperature change") %>%
+  select(-1, -3, -4, -5, -6, -7) %>%
+  rename(country = Area)
+
+colnames(earth_land_temp_df) <- gsub("Y", "", colnames(earth_land_temp_df))
+
+earth_land_temp_df <- earth_land_temp_df%>%
+  group_by(country) %>%
+  summarise_each(sum) 
