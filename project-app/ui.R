@@ -592,7 +592,7 @@ report <- tabPanel("Report",
                    )
 
 # UI
-ui <- navbarPage("INFO201 Project App",
+ui <- navbarPage("The STAR-ting Point",
                  introduction,
                  takeaways,
                  report,
