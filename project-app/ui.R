@@ -19,15 +19,49 @@ source("dataframes_P3.R")
 exo_inputs <- sidebarPanel(
   selectInput(
     "exo_x_input",
-    "Select an x variable:",
-    choices = colnames(planet_summary)[-1],
+    "Select an X Variable:",
+    # choices = colnames(planet_summary)[-1],
+    choices = list("Number of Stars" = "num_stars",
+                   "Number of Planets" = "num_planets",
+                   "Discovery Year" = "discovery_year",
+                   "Orbital Period (days)" = "orbital_period_days",
+                   "Orbit Semi-Major Axis" = "orbital_semi_maj_axis_au",
+                   "Planet Radius (Earth)" = "planet_rad_e",
+                   "Planet Radius (Jupiter)" = "planet_rad_j",
+                   "Planet Mass (Earth)" = "planet_mass_e",
+                   "Planet Mass (Jupiter)" = "planet_mass_j",
+                   "Orbital Eccentricity" = "eccentricity",
+                   "Equilibrium Temp (K)" = "planet_equi_temp_k",
+                   "Spectral Type" = "spectral_type",
+                   "Stellar Effective Temp (K)" = "stellar_eff_temp_k",
+                   "Stellar Radius (Solar Radius)" = "stellar_rad_sol",
+                   "Stellar Mass (Solar Mass)" = "stellar_mass_sol",
+                   "Stellar Surface Gravity" = "stellar_surf_grav"
+                   ),
     selected = "num_stars"
   ),
   selectInput(
     "exo_y_input",
-    "Select a y variable:",
-    choices = colnames(planet_summary)[-1],
-    selected = "num_planets"
+    "Select a Y Variable:",
+    # choices = colnames(planet_summary)[-1],
+    choices = list("Number of Stars" = "num_stars",
+                   "Number of Planets" = "num_planets",
+                   "Discovery Year" = "discovery_year",
+                   "Orbital Period (days)" = "orbital_period_days",
+                   "Orbit Semi-Major Axis" = "orbital_semi_maj_axis_au",
+                   "Planet Radius (Earth)" = "planet_rad_e",
+                   "Planet Radius (Jupiter)" = "planet_rad_j",
+                   "Planet Mass (Earth)" = "planet_mass_e",
+                   "Planet Mass (Jupiter)" = "planet_mass_j",
+                   "Orbital Eccentricity" = "eccentricity",
+                   "Equilibrium Temp (K)" = "planet_equi_temp_k",
+                   "Spectral Type" = "spectral_type",
+                   "Stellar Effective Temp (K)" = "stellar_eff_temp_k",
+                   "Stellar Radius (Solar Radius)" = "stellar_rad_sol",
+                   "Stellar Mass (Solar Mass)" = "stellar_mass_sol",
+                   "Stellar Surface Gravity" = "stellar_surf_grav"
+    ),
+    selected = "discovery_year"
   ),
   checkboxInput(
     "habitable",
@@ -62,11 +96,11 @@ fire_inputs <- sidebarPanel(
 
 explore_data <- tabPanel("Data Exploration",
                          titlePanel("Data Exploration"),
-                         h4("We can only cover a small amount of research questions, so this page
+                         p("We can only cover a small amount of research questions, so this page
                              is for you to do some data exploration of your own. By configuring the
                              chart options, this page allows you to focus on questions and
                              comparisons you might be interested in. Use the options on the left to
-                             configure it's corresponding graph."),
+                             select variables configure the corresponding graph."),
                          sidebarLayout(
                            exo_inputs,
                            mainPanel(plotlyOutput("exo_user_plot"))
@@ -81,6 +115,8 @@ explore_data <- tabPanel("Data Exploration",
                          )
 )
 
+# KelliAnn
+
 takeaways <- tabPanel(
   "Takeaways",
   titlePanel("Takeaways"),
@@ -89,8 +125,10 @@ takeaways <- tabPanel(
     temperature with a very small number of countries that have experienced a decrease
     in temperature. This increase will likely build over many years until someday
     Earth’s conditions may become too extreme for humans to comfortably live in. A
-    takeaway we hope to share in our visualizationa and data is the need to begin
-    increasing space exploration to find habitable planets in our future."),
+    takeaway we hope to share from our visualizations and data is the need to begin
+    increasing space exploration to find habitable planets in our future. In order
+    to prepare for the possibility of relocation in the future due to climate issues,
+    we must start as soon as possible."),
   h4("Fires"),
   p("The increase in fires that is shown by the US maps as time progresses supports the
     change in climate that we have all felt as well as the temperature increases revealed
@@ -98,7 +136,9 @@ takeaways <- tabPanel(
     number of wildfires in recent years compared to previous ones, fires may continue to
     increase in coming years. Another idea we hope users can takeaway from our data is
     that the effects of climate change are becoming increasingly present in multiple
-    forms."),
+    forms. Increasing temperatuers and number of fires are just two factors that are
+    becoming more evident and may continue to grow. Spreading awareness about this may
+    alert users to learn more about the issue and take part in helping slow this growth."),
   h4("Exoplanets"),
   p("One of the biggest (and slightly discouraging) things we can learn from comparing
     different exoplanet charts is that there aren’t really a lot of exoplanets out there
@@ -108,7 +148,10 @@ takeaways <- tabPanel(
     not take into account what the weather is like on the exoplanet. Extreme weather can
     make the planet uninhabitable even though it has a habitable surface temperature. We
     hope users can take away new knowledge about exoplanets and possible features in
-    habitable exoplanets to encourage space exploration.")
+    habitable exoplanets to encourage space exploration. This area is not widely discussed
+    and is often not considered when we discuss the future of humanity. We hope users
+    can take away information about space exploration and continue thinking of factors
+    that could contribute to an exoplanet being habitable for humans.")
 )
 
 # Salley
@@ -161,7 +204,7 @@ widgets_page <- tabPanel(
 fire_input <- sidebarPanel(
   selectInput(
     inputId = "fireyear",
-    label = "Select year",
+    label = "Select a Year",
     choices = c("2005","2006","2007","2008", "2009", "2010", "2011", "2012",
                 "2013", "2014","2015")
   )
@@ -196,7 +239,7 @@ widgets_climate <- tabPanel(
   sidebarLayout(temp_input, temp_plot)
 )
 
-
+# Claire
 introduction <- tabPanel("Introduction",
     img(src = "https://assets.newatlas.com/dims4/default/3168c10/2147483647/strip/true/crop/1080x720+0+180/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fearth-from-space-6.jpg",
         width = "95%,", height = "95%"),
@@ -210,25 +253,6 @@ introduction <- tabPanel("Introduction",
       (e.g., the orbital period corresponding to a certain mass of an exoplanet nearby).
       We also want to include data about Earth to give users of the website an idea as to
       what features an exoplanet needs in order to sustain human life in the future."),
-    p("Human values our topic touches on self-reliance, determination, and problem solving.
-      Our issue we hope to help solve is one that concerns the future of the human race.
-      The future is in our own hands and with these values in mind, we may be able to better
-      prepare and anticipate issues for generations to come."),
-    p("Direct stakeholders for our website include astronomy enthusiasts who want to 
-      learn more about exoplanets and stars, policymakers supporting the increase 
-      in space exploration and investment, and aerospace engineers and researchers, 
-      who may use our data as a starting point in creating new technologies and 
-      designs that find exoplanets and study their habitability (Burbach, 2019). 
-      Indirect stakeholders include citizens who may be affected by decisions made 
-      by the gov’t and policymakers who use our website."),
-    p("Harms that may come from our project largely concern the ethics behind what we hope
-      to achieve. Encouraging the search for other habitable planets may cause people to
-      treat Earth as disposable. Colonizing other planets with the possibility of bringing
-      bacteria, disease, and other harmful elements should be discussed (Dirks, 2021).
-      Benefits from our project could include the increased interest and investment in
-      space exploration. Preparing early for the potential relocation of humans is another
-      benefit, as our data could be implemented to discover new exoplanets and determine
-      their living conditions."),
     h3("Research Questions"),
     p("The questions our project seeks to answer are as follows:"),
     p("1. Of the exoplanets we know of, what is the proportion of exoplanets that are habitable, 
@@ -249,16 +273,12 @@ introduction <- tabPanel("Introduction",
     p("Out of the planets we know of, a very small proportion of them are habitable. When
       looking through our exoplanet dataset, we noted a significantly smaller proportion than
       we had imagined (about 0.81%). We found this percentage through going through different
-      features of exoplanets and seeing which ones were similar to Earth. Because a majority
-      of exoplanets were larger than earth (95.39%), this feature already filtered out a great
-      number of possible habitable planets."),
-    p("In both features covered in our earth-land-temps.csv and our fires.csv file
-      (temperature changes over time and wildfire data, respectively), we have found dramatic changes.
+      features of exoplanets and seeing which ones were similar to Earth."),
+    p("In both features covered temperature and wildfire datasets, we have found dramatic changes.
       Temperature increases were apparent year-long, with the highest temperature change occuring in
       March (0.6 degrees C) and the lowest occurring in December (0.43 degrees C). For wildfires,
-      the difference in number of wildfires was more than 30,000 from 1992 to 2015. and showed the
-      fastest growth in wildfires in recent years. Both tempreatures and fires
-      throughout the world have been rising (most significantly in recent years)."),
+      the difference in number of wildfires was more than 30,000 from 1992 to 2015 and showed the
+      fastest growth in wildfires in recent years."),
     p("In going through our two datasets, we have noted ethical concerns behind space exploration
       and have considered the risks for if we encounter life outside Earth. Firstly, an ethical
       concern could be the continued (and likely strengthened) mistreatment of our planet. Secondly,
@@ -267,6 +287,7 @@ introduction <- tabPanel("Introduction",
       we should do if we were to encounter life outside of Earth is important to consider."),
 )
 
+# Salley
 brief_intro <- tabPanel("Project Brief & Intro",
   h3("Project Brief"),
   p(strong("Code Name:"), "Mission:Planet"),
@@ -569,8 +590,6 @@ report <- tabPanel("Report",
                                         ack_ref)
                               )
                    )
-
-
 
 # UI
 ui <- navbarPage("INFO201 Project App",

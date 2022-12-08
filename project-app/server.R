@@ -11,7 +11,6 @@ library(shinyWidgets)
 library(leaflet)
 
 # KelliAnn
-#source("../source/exoplanet-chart-code.R")
 
 exoplanets <- read_csv("exoplanets.csv")
 
@@ -76,7 +75,7 @@ planet_summary$stellar_rad_sol[is.nan(planet_summary$stellar_rad_sol)] <- NA
 planet_summary$stellar_mass_sol[is.nan(planet_summary$stellar_mass_sol)] <- NA
 planet_summary$stellar_surf_grav[is.nan(planet_summary$stellar_surf_grav)] <- NA
 
-
+# Salley
 earth_temp_simplifed <- read_csv("earth-land-temps.csv")
 earth_temp_simplifed <- earth_temp_simplifed %>% select(-`Element Code`, -Element, -Unit)
 colnames(earth_temp_simplifed)[c(1:4)] <- c("area_code", "country", "month_code", "month_name")
@@ -157,8 +156,7 @@ shinyServer(function(input, output) {
   # Claire
   output$distPlot <- renderLeaflet({
     fires<- read_csv("fires.csv") 
-    #View(fires)
-    
+
     # Mutating dataframe
     fires <- fires %>%
       rename(year = FIRE_YEAR, date = DISCOVERY_DATE, state = STATE, 
@@ -247,7 +245,7 @@ shinyServer(function(input, output) {
       geom_point() +
       scale_x_continuous(labels = scales::comma) +
       scale_y_continuous(labels = scales::comma) +
-      labs(title = paste(input$exo_y_input, "vs", input$exo_x_input))
+      labs(title = paste(input$exo_x_input, "vs", input$exo_y_input))
     
     ggplotly(plot)
     
